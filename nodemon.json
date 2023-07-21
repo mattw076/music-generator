@@ -1,9 +1,8 @@
 {
     "execMap": {
-        "js": "node",
-        "jsx": "./jsx.bat"
+        "js": "node"
     },
-    "ext": "js jsx",
+    "ext": "js",
     "ignore": [
         "node_modules"
     ],
