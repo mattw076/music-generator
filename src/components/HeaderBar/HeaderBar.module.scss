@@ -1,0 +1,28 @@
+.headerBar {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    width: 100%;
+    background: linear-gradient(to bottom right, rgb(128, 0, 128), rgb(174, 0, 118), rgb(210, 0, 102), rgb(236, 46, 83), rgb(252, 87, 62));
+    color: white;
+    padding: 20px;
+
+    >.logo {
+        height: 100%;
+        margin-right: 6px;
+    }
+
+    >.title {
+        font-size: 1.25rem;
+        // "relative to root element" - 20px
+        // root element is typically <html> which has browser default of 16px
+        margin-right: auto;
+    }
+
+    >.subheading {
+        font-size: 0.75rem;
+        // "relative to root element" - i.e. 12px
+        font-weight: 500;
+        margin-left: auto;
+    }
+}

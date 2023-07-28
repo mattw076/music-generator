@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 
-import HeaderBar from "./components/HeaderBar.jsx";
+import HeaderBar from "./components/HeaderBar/HeaderBar.jsx";
 
 const App = () => {
     return (

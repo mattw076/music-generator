@@ -8,7 +8,7 @@
         "build": "webpack --mode production",
         "rebuild": "if exist dist\\ rmdir /s /q dist && webpack --mode production",
         "start": "nodemon server/app.js",
-        "dev": "concurrently \"if exist dist\\ rmdir /s /q dist && && webpack --watch --mode development\" \"nodemon server/app.js\""
+        "dev": "concurrently \"if exist dist\\ rmdir /s /q dist && webpack --watch --mode development\" \"nodemon server/app.js\""
     },
     "author": "",
     "license": "ISC",

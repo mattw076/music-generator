@@ -16,7 +16,8 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: "[name].js"
+        filename: "[name].js",
+        chunkFilename: 'chunk-[id].css',
     },
     plugins: [htmlPlugin, miniCssExtractPlugin],
     module: {
@@ -31,8 +32,24 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "sass-loader"
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true,
+                            importLoaders: 1,
+                            modules: {
+                                // Generate a unique identifier for CSS classes
+                                // e.g. two different elements with .class-1 in separate components will be given different class names to eachother
+                                localIdentName: '[local]-[hash:base64:5]'
+                            }
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }
                 ]
             }
         ]
