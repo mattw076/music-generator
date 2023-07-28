@@ -2,12 +2,13 @@ import React from "react";
 import "./App.scss";
 
 import HeaderBar from "./components/HeaderBar/HeaderBar.jsx";
+import GenrePicker from "./components/GenrePicker/GenrePicker.jsx";
 
 const App = () => {
     return (
         <div>
             <HeaderBar />
-            <div >Welcome to the Music Generator</div>
+            <GenrePicker />
         </div>
     )
 };

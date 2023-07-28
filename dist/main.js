@@ -16,7 +16,27 @@
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.scss */ \"./src/App.scss\");\n/* harmony import */ var _components_HeaderBar_HeaderBar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/HeaderBar/HeaderBar.jsx */ \"./src/components/HeaderBar/HeaderBar.jsx\");\n\n\n\nvar App = function App() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_HeaderBar_HeaderBar_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, \"Welcome to the Music Generator\"));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n//# sourceURL=webpack://music-generator/./src/App.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.scss */ \"./src/App.scss\");\n/* harmony import */ var _components_HeaderBar_HeaderBar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/HeaderBar/HeaderBar.jsx */ \"./src/components/HeaderBar/HeaderBar.jsx\");\n/* harmony import */ var _components_GenrePicker_GenrePicker_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/GenrePicker/GenrePicker.jsx */ \"./src/components/GenrePicker/GenrePicker.jsx\");\n\n\n\n\nvar App = function App() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_HeaderBar_HeaderBar_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_GenrePicker_GenrePicker_jsx__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n//# sourceURL=webpack://music-generator/./src/App.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/GenrePicker/GenrePicker.jsx":
+/*!****************************************************!*\
+  !*** ./src/components/GenrePicker/GenrePicker.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _GenrePicker_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GenrePicker.module.scss */ \"./src/components/GenrePicker/GenrePicker.module.scss\");\n/* harmony import */ var _SpotifyData_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SpotifyData.js */ \"./src/components/GenrePicker/SpotifyData.js\");\n\n\n\nvar GenrePicker = function GenrePicker() {\n  var handleClick = function handleClick(e) {\n    e.preventDefault();\n    console.log(_SpotifyData_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].tracks[0].id);\n  };\n  var songURI = \"https://open.spotify.com/embed/track/\".concat(_SpotifyData_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].tracks[0].id);\n  // TODO: use state to update song displayed automatically\n\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"main\", {\n    className: _GenrePicker_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].genrePicker\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"form\", {\n    className: _GenrePicker_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].form\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"input\", {\n    className: _GenrePicker_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].input,\n    type: \"text\",\n    placeholder: \"Genre\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"input\", {\n    className: _GenrePicker_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].input,\n    type: \"text\",\n    placeholder: \"Popularity\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"button\", {\n    className: _GenrePicker_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].button,\n    onClick: handleClick\n  }, \"Get song\")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"iframe\", {\n    className: _GenrePicker_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].song,\n    src: songURI,\n    width: \"100%\",\n    height: \"100%\",\n    allow: \"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\",\n    loading: \"lazy\"\n  }));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GenrePicker);\n\n//# sourceURL=webpack://music-generator/./src/components/GenrePicker/GenrePicker.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/GenrePicker/SpotifyData.js":
+/*!***************************************************!*\
+  !*** ./src/components/GenrePicker/SpotifyData.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  \"seeds\": [{\n    \"afterFilteringSize\": 1000,\n    \"afterRelinkingSize\": 1000,\n    \"href\": null,\n    \"id\": \"drum-and-bass\",\n    \"initialPoolSize\": 1000,\n    \"type\": \"GENRE\"\n  }],\n  \"tracks\": [{\n    \"album\": {\n      \"album_type\": \"ALBUM\",\n      \"total_tracks\": 15,\n      \"available_markets\": [],\n      \"external_urls\": {\n        \"spotify\": \"https://open.spotify.com/album/5i90ZRThEcUxoiq9ihDeFA\"\n      },\n      \"href\": \"https://api.spotify.com/v1/albums/5i90ZRThEcUxoiq9ihDeFA\",\n      \"id\": \"5i90ZRThEcUxoiq9ihDeFA\",\n      \"images\": [{\n        \"url\": \"https://i.scdn.co/image/ab67616d0000b273c235fba483eae88f5ba58d43\",\n        \"height\": 640,\n        \"width\": 640\n      }, {\n        \"url\": \"https://i.scdn.co/image/ab67616d00001e02c235fba483eae88f5ba58d43\",\n        \"height\": 300,\n        \"width\": 300\n      }, {\n        \"url\": \"https://i.scdn.co/image/ab67616d00004851c235fba483eae88f5ba58d43\",\n        \"height\": 64,\n        \"width\": 64\n      }],\n      \"name\": \"Netsky\",\n      \"release_date\": \"2010-05-28\",\n      \"release_date_precision\": \"day\",\n      \"type\": \"album\",\n      \"uri\": \"spotify:album:5i90ZRThEcUxoiq9ihDeFA\",\n      \"artists\": [{\n        \"external_urls\": {\n          \"spotify\": \"https://open.spotify.com/artist/5TgQ66WuWkoQ2xYxaSTnVP\"\n        },\n        \"href\": \"https://api.spotify.com/v1/artists/5TgQ66WuWkoQ2xYxaSTnVP\",\n        \"id\": \"5TgQ66WuWkoQ2xYxaSTnVP\",\n        \"name\": \"Netsky\",\n        \"type\": \"artist\",\n        \"uri\": \"spotify:artist:5TgQ66WuWkoQ2xYxaSTnVP\"\n      }]\n    },\n    \"artists\": [{\n      \"external_urls\": {\n        \"spotify\": \"https://open.spotify.com/artist/5TgQ66WuWkoQ2xYxaSTnVP\"\n      },\n      \"href\": \"https://api.spotify.com/v1/artists/5TgQ66WuWkoQ2xYxaSTnVP\",\n      \"id\": \"5TgQ66WuWkoQ2xYxaSTnVP\",\n      \"name\": \"Netsky\",\n      \"type\": \"artist\",\n      \"uri\": \"spotify:artist:5TgQ66WuWkoQ2xYxaSTnVP\"\n    }],\n    \"available_markets\": [],\n    \"disc_number\": 1,\n    \"duration_ms\": 268386,\n    \"explicit\": false,\n    \"external_ids\": {\n      \"isrc\": \"GBCJY1016708\"\n    },\n    \"external_urls\": {\n      \"spotify\": \"https://open.spotify.com/track/4pc39w4xkhuJxIZssCoQWg\"\n    },\n    \"href\": \"https://api.spotify.com/v1/tracks/4pc39w4xkhuJxIZssCoQWg\",\n    \"id\": \"4pc39w4xkhuJxIZssCoQWg\",\n    \"name\": \"Gravity\",\n    \"popularity\": 0,\n    \"preview_url\": null,\n    \"track_number\": 8,\n    \"type\": \"track\",\n    \"uri\": \"spotify:track:4pc39w4xkhuJxIZssCoQWg\",\n    \"is_local\": false\n  }]\n});\n\n//# sourceURL=webpack://music-generator/./src/components/GenrePicker/SpotifyData.js?");
 
 /***/ }),
 
@@ -26,7 +46,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeaderBar.module.scss */ \"./src/components/HeaderBar/HeaderBar.module.scss\");\n\n\nvar HeaderBar = function HeaderBar() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"header\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].headerBar\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"img\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].logo,\n    src: \"../images/music-logo.png\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h2\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].title\n  }, \"Music Generator\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h4\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].subheading\n  }, \"Discover new genres\"));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeaderBar);\n\n//# sourceURL=webpack://music-generator/./src/components/HeaderBar/HeaderBar.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeaderBar.module.scss */ \"./src/components/HeaderBar/HeaderBar.module.scss\");\n/* harmony import */ var _images_music_logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../images/music-logo.png */ \"./src/images/music-logo.png\");\n\n\n\nvar HeaderBar = function HeaderBar() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"header\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].headerBar\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"img\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].logo,\n    src: _images_music_logo_png__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h2\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].title\n  }, \"Music Generator\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h4\", {\n    className: _HeaderBar_module_scss__WEBPACK_IMPORTED_MODULE_1__[\"default\"].subheading\n  }, \"Discover new genres\"));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeaderBar);\n\n//# sourceURL=webpack://music-generator/./src/components/HeaderBar/HeaderBar.jsx?");
 
 /***/ }),
 
@@ -40,6 +60,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 
 /***/ }),
 
+/***/ "./src/images/music-logo.png":
+/*!***********************************!*\
+  !*** ./src/images/music-logo.png ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"7fc59ee494a841826b6e4b6f3c5105cc.png\");\n\n//# sourceURL=webpack://music-generator/./src/images/music-logo.png?");
+
+/***/ }),
+
 /***/ "./src/App.scss":
 /*!**********************!*\
   !*** ./src/App.scss ***!
@@ -47,6 +77,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// extracted by mini-css-extract-plugin\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});\n\n//# sourceURL=webpack://music-generator/./src/App.scss?");
+
+/***/ }),
+
+/***/ "./src/components/GenrePicker/GenrePicker.module.scss":
+/*!************************************************************!*\
+  !*** ./src/components/GenrePicker/GenrePicker.module.scss ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// extracted by mini-css-extract-plugin\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"genrePicker\":\"genrePicker-uftzl\",\"form\":\"form-NlBMj\",\"song\":\"song-WLFV3\"});\n\n//# sourceURL=webpack://music-generator/./src/components/GenrePicker/GenrePicker.module.scss?");
 
 /***/ }),
 
@@ -174,6 +214,18 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -197,6 +249,29 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /******/ 			if (!module.children) module.children = [];
 /******/ 			return module;
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /************************************************************************/

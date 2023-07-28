@@ -16,8 +16,7 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: "[name].js",
-        chunkFilename: 'chunk-[id].css',
+        filename: "[name].js"
     },
     plugins: [htmlPlugin, miniCssExtractPlugin],
     module: {
@@ -26,6 +25,10 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                loader: 'file-loader'
             },
             {
                 test: /\.scss$/,

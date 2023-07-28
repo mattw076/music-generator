@@ -1,0 +1,31 @@
+.genrePicker {
+
+    padding: 36px;
+    
+    
+    > .form {
+        font-family: "Karla", sans-serif;
+        display: grid;
+        grid-template: 40px 40px / 1fr 1fr; // columns' width / height (1 fraction = entire height)
+        gap: 17px;
+
+        > input {
+            border-radius: 5px;
+            border: 1px solid rgb(207, 124, 164); 
+            text-indent: 5px;
+        }
+
+        > button {
+            grid-column: 1 / -1; // spans entire grid (from very beginning to very end of grid)
+            border-radius: 5px;
+            background-color: rgb(216, 202, 209);
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    > .song {
+        border-radius: 12px;
+        margin-top: 36px;
+    }
+}
