@@ -1,0 +1,21 @@
+.historyItem {
+    
+    margin-top: 12px;
+    height: 100px;
+    white-space:nowrap;
+    overflow:hidden;
+
+    & .star {
+        font-size: 30px;
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: top;
+    }
+
+    & .song {
+
+        width: 95%;
+        border-radius: 12px;
+        display: inline-block;
+    }
+}

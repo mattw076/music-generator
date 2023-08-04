@@ -1,29 +1,90 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import styles from './GenrePicker.module.scss';
 
-import spotifyData from "./SpotifyData.js";
+import GenrePickerForm from '../GenrePickerForm/GenrePickerForm.jsx';
+import GenrePickerPlayer from '../GenrePickerPlayer/GenrePickerPlayer.jsx';
+import GenrePickerHistory from '../GenrePickerHistory/GenrePickerHistory.jsx';
+
 
 const GenrePicker = () => {
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        console.log(spotifyData.tracks[0].id);
-    };
+    const [song, setSong] = useState({
+        genre: "",
+        targetEnergy: "",
+        URI: "",
+        favourite: false
+    });
 
-    const songURI = `https://open.spotify.com/embed/track/${spotifyData.tracks[0].id}`;
-    // TODO: use state to update song displayed automatically
+    // useState(initialStateValue), returns array [ stateValue, setStateValue ]
+
+    // Best practice when new state value is based on old state value is to pass callback to setState:
+    // setState(prevState => prevState + 1);
+
+    // Can also pass a callback function as 2nd paramter to be run after state is set (since state is set asynchronously)
+
+    // Generally, it is bad practice to initialise state using props directly. It is likely better to put state in the parent component in this case. See:
+    // https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+
+
+    const hist1 = {
+        genre: "",
+        targetEnergy: "",
+        URI: "",
+        favourite: false
+    }
+
+    const hist2 = {
+        genre: "",
+        targetEnergy: "",
+        URI: "",
+        favourite: false
+    }
+
+    const hist3 = {
+        genre: "",
+        targetEnergy: "",
+        URI: "",
+        favourite: false
+    }
+
+    const initialHistory = [song, hist1, hist2, hist3];
+
+    const [history, setHistory] = useState(initialHistory)
+
+    // handleClickStar takes the id of the song in the history array
+    const handleClickStar = (id) => {
+        setHistory(prevHistory => {
+            const newHistory = [];
+            for (i=0; i++; i < prevHistory.length) {
+                const currentSong = history[i];
+                if (currentSong.id === id) {
+                    const updatedSong = {
+                        ...currentSong,
+                        favourite: !currentSong.favourite
+                    };
+                    newHistory.push(updatedSong);
+                } else {
+                    newHistory.push(currentSong);
+                }
+            }
+            return newHistory;
+        })
+    };
 
     return (
         <main className={styles.genrePicker}>
-            <form className={styles.form} >
-                <input className={styles.input} type="text" placeholder="Genre" />
-                <input className={styles.input} type="text" placeholder="Popularity" />
-                <button className={styles.button} onClick={handleClick}>Get song</button>
-            </form>
-            <iframe className={styles.song} src={songURI} width="100%" height="100%" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <GenrePickerForm setSong={setSong} />
+            <GenrePickerPlayer song={song} history={history} handleClickStar={handleClickStar}/>
+            <GenrePickerHistory song={song} history={history} handleClickStar={handleClickStar}/>
         </main>
     )
+
+
+
+    // TODO: one style sheet for each component (so that stars are styled correctly)
+    // TODO: get handleClickStar working (see 7:12:00 on wards in video)
+
+    // TODO: update History every time you fetch a new song
 }
 
 export default GenrePicker
