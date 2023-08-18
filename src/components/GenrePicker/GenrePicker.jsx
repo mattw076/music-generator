@@ -56,17 +56,8 @@ const GenrePicker = () => {
     const handleClickStar = (id) => {
         setHistory(prevHistory => {
             return prevHistory.map((song, i) => {
-                // if position of song in history matches the given id
-                if (i === id) {
-                    // update the "favourite" property of the song that was clicked
-                    return {
-                        ...song,
-                        favourite: !song.favourite
-                    };
-                } else {
-                    // otherwise don't update the "favoruite" property
-                    return song;
-                }
+                // if position of song in history matches the given id, update the "favourite" property of the song that was clicked, otherwise don't update the "favoruite" property
+                return (i === id) ? { ...song, favourite: !song.favourite } : song;
             })
         })
     };
