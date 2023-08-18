@@ -22,7 +22,8 @@ const GenrePicker = () => {
 
     // Can also pass a callback function as 2nd paramter to be run after state is set (since state is set asynchronously)
 
-    // Generally, it is bad practice to initialise state using props directly. It is likely better to put state in the parent component in this case. See:
+
+    // Generally, it is bad practice to initialise state based on the value of incoming props (e.g. each favourites star intialises its own state based on a "favourite" prop). It is likely better to put state in the parent component in this case. See:
     // https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
 
 
@@ -51,19 +52,22 @@ const GenrePicker = () => {
 
     const [history, setHistory] = useState(initialHistory)
 
-    // handleClickStar takes the id of the song in the history array
+    // handleClickStar takes the id of the particular history item component
     const handleClickStar = (id) => {
         setHistory(prevHistory => {
             const newHistory = [];
-            for (i=0; i++; i < prevHistory.length) {
+            for (let i = 0; i < prevHistory.length; i++ ) {
                 const currentSong = history[i];
-                if (currentSong.id === id) {
+                // if position of song in history matches the given id
+                if (i === id) {
+                    // update the "favourite" property of the song that was clicked
                     const updatedSong = {
                         ...currentSong,
                         favourite: !currentSong.favourite
                     };
                     newHistory.push(updatedSong);
                 } else {
+                    // otherwise don't update the "favoruite" property
                     newHistory.push(currentSong);
                 }
             }
@@ -78,9 +82,6 @@ const GenrePicker = () => {
             <GenrePickerHistory song={song} history={history} handleClickStar={handleClickStar}/>
         </main>
     )
-
-
-    // TODO: get handleClickStar working (see 7:12:00 onwards in video)
 
     // TODO: update History every time you fetch a new song
 }
