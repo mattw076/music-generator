@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../GenrePicker/GenrePicker.module.scss';
+import styles from './GenrePickerForm.module.scss';
 
 import spotifyData from "./SpotifyData.js";
 

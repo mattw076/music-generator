@@ -9,7 +9,7 @@ const GenrePickerHistoryItem = (props) => {
 
     return (
         <div className={styles.historyItem}>
-            <Star className={styles.star} id={id} history={history} handleClickStar={handleClickStar} />
+            <Star classes={{historyStar: styles.historyStar}} id={id} history={history} handleClickStar={handleClickStar} />
             < iframe className={styles.song} src={song.URI} width="100%" height="100%" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
     )

@@ -80,9 +80,7 @@ const GenrePicker = () => {
     )
 
 
-
-    // TODO: one style sheet for each component (so that stars are styled correctly)
-    // TODO: get handleClickStar working (see 7:12:00 on wards in video)
+    // TODO: get handleClickStar working (see 7:12:00 onwards in video)
 
     // TODO: update History every time you fetch a new song
 }
