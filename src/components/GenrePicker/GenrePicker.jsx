@@ -55,23 +55,19 @@ const GenrePicker = () => {
     // handleClickStar takes the id of the particular history item component
     const handleClickStar = (id) => {
         setHistory(prevHistory => {
-            const newHistory = [];
-            for (let i = 0; i < prevHistory.length; i++ ) {
-                const currentSong = history[i];
+            return prevHistory.map((song, i) => {
                 // if position of song in history matches the given id
                 if (i === id) {
                     // update the "favourite" property of the song that was clicked
-                    const updatedSong = {
-                        ...currentSong,
-                        favourite: !currentSong.favourite
+                    return {
+                        ...song,
+                        favourite: !song.favourite
                     };
-                    newHistory.push(updatedSong);
                 } else {
                     // otherwise don't update the "favoruite" property
-                    newHistory.push(currentSong);
+                    return song;
                 }
-            }
-            return newHistory;
+            })
         })
     };
 
