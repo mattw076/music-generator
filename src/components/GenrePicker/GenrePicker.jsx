@@ -30,21 +30,21 @@ const GenrePicker = () => {
     const hist1 = {
         genre: "",
         targetEnergy: "",
-        URI: "",
+        URI: "https://open.spotify.com/embed/track/0ZixBENDWFlEY7q1jI9Zjd",
         favourite: false
     }
 
     const hist2 = {
         genre: "",
         targetEnergy: "",
-        URI: "",
+        URI: "https://open.spotify.com/embed/track/2gcgwomqMF4Z92EZAPv3Ic",
         favourite: false
     }
 
     const hist3 = {
         genre: "",
         targetEnergy: "",
-        URI: "",
+        URI: "https://open.spotify.com/embed/track/602d2gJewoiF1FivuOMMwE",
         favourite: false
     }
 

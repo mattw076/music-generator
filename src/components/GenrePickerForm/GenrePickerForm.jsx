@@ -9,7 +9,6 @@ const GenrePickerForm = (props) => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        console.log(e);
         // TODO: get API key
         // TODO: get form values to send in API call
         // TODO: get list of genres using GET /recommendations/available-genre-seeds
