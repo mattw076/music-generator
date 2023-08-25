@@ -11,9 +11,7 @@ const GenrePickerHistory = (props) => {
     const [favouritesToggled, setfavouritesToggled ] = useState(false);
 
     const handleClickToggle = () => {
-        //console.log("Before: " + favouritesToggled);
         setfavouritesToggled(!favouritesToggled);
-        //console.log("After: " + favouritesToggled);
     }
 
     const historyItems = history.slice(1).map((song, i) => <GenrePickerHistoryItem key={i+1} song={song} history={history} id={i+1} handleClickStar={handleClickStar}/>);

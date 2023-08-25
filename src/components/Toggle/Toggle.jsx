@@ -9,11 +9,6 @@ const Toggle = (props) => {
     // TODO: label should be passed in as props to be reusable
     // NOTE: each Toggle will need a unique id
 
-    // useEffect(() => {
-    //     console.log(isToggled.value);
-    //     // undefined
-    //   }, [isToggled.value]);
-
     return (
         <label className={styles.switch}>
             <span className={styles.text}>Show only favourites</span>
