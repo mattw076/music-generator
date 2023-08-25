@@ -11,6 +11,7 @@ const GenrePickerForm = (props) => {
         genre: "",
         energy: "" 
     });
+    // best practice to keep form data in an object and use a single piece of state for it (rather than one state for each input)
     
     console.log(formData);
 
@@ -58,3 +59,7 @@ const GenrePickerForm = (props) => {
 // NOTE: in React, textarea HTML tag has been changed to be self-closing and works in the same way as input (needs name, value attribute etc.). Usually textarea value comes from the text between the tags
 
 export default GenrePickerForm
+
+
+// MATT: here**
+// TODO: add a checkbox, radio buttons and select to the form (controlled components) - follow along with the video
