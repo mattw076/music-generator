@@ -1,30 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './GenrePickerHistory.module.scss';
 
+import Toggle from '../Toggle/Toggle.jsx';
 import GenrePickerHistoryItem from '../GenrePickerHistoryItem/GenrePickerHistoryItem.jsx'
 
 const GenrePickerHistory = (props) => {
 
     const { song, history, handleClickStar } = props;
 
+    const [favouritesToggled, setfavouritesToggled ] = useState(false);
+
+    const handleClickToggle = () => setfavouritesToggled(!favouritesToggled);
+
     const historyItems = history.slice(1).map((song, i) => <GenrePickerHistoryItem key={i+1} song={song} history={history} id={i+1} handleClickStar={handleClickStar}/>);
-
-    // const historyItemsFavourited = history.slice(1)
-    // .filter(song => song.favourite === true)
-    // .map((song, i) => <GenrePickerHistoryItem key={i+1} song={song} history={history} id={i+1} handleClickStar={handleClickStar}/>
-    // );
     const historyItemsFavourited = historyItems.filter(item => item.props.song.favourite === true);
-    // Q: is having 2 different arrays of items even the best way to do it? Both of the above seem inefficient
-
-    console.log(historyItemsFavourited);
-
-    // TODO: conditionally render non-favourited items based on "Show only favourites" toggle 
-    let showOnlyFavourites = false;
+    // Q: is having 2 different arrays of items the right way to do it? Seems inefficient
 
     return (
         <div className={styles.history}>
             <h3 className={styles.heading}>History</h3>
-            {showOnlyFavourites ? historyItemsFavourited : historyItems}
+            <Toggle toggled={favouritesToggled} handleClick={handleClickToggle}/>
+            {favouritesToggled ? historyItemsFavourited : historyItems}
+            {/* Two below are equivalent to above:
+            {showOnlyFavourites && historyItemsFavourited}
+            {!showOnlyFavourites && historyItems} */}
         </div>
     )
 }
