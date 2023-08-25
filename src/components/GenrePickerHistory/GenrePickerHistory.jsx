@@ -8,10 +8,10 @@ const GenrePickerHistory = (props) => {
 
     const { history, handleClickStar } = props;
 
-    const [favouritesToggled, setfavouritesToggled ] = useState(false);
+    const [favouritesToggled, setFavouritesToggled ] = useState(false);
 
-    const handleClickToggle = () => {
-        setfavouritesToggled(!favouritesToggled);
+    const handleChangeFavouritesToggled = () => {
+        setFavouritesToggled(!favouritesToggled);
     }
 
     const historyItems = history.slice(1).map((song, i) => <GenrePickerHistoryItem key={i+1} song={song} history={history} id={i+1} handleClickStar={handleClickStar}/>);
@@ -21,7 +21,7 @@ const GenrePickerHistory = (props) => {
     return (
         <div className={styles.history}>
             <h3 className={styles.heading}>History</h3>
-            <Toggle isToggled={favouritesToggled} handleClick={handleClickToggle}/>
+            <Toggle isToggled={favouritesToggled} handleChange={handleChangeFavouritesToggled}/>
             {favouritesToggled ? historyItemsFavourited : historyItems}
             {/* Two below are equivalent to above:
             {showOnlyFavourites && historyItemsFavourited}
