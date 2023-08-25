@@ -15,10 +15,12 @@ const GenrePickerForm = (props) => {
     console.log(formData);
 
     const handleChange = (e) => {
+        const {name, value, type, checked } = e.target;
         setFormData(prevFormData => {
             return {
                 ...prevFormData,
-                [e.target.name]: e.target.value
+                [name]: type === "checkbox" ? checked : value
+                // now this handleChange function will also work for checkboxes
             }
         });
     }
@@ -52,5 +54,7 @@ const GenrePickerForm = (props) => {
 
 // NOTE: we specifiy the value of the inputs as being based on the value of their respective state (make sure to define a name attribute), rather than leaving it to the built-in HTML inout "state".
 // These are called "controlled components": https://legacy.reactjs.org/docs/forms.html
+
+// NOTE: in React, textarea HTML tag has been changed to be self-closing and works in the same way as input (needs name, value attribute etc.). Usually textarea value comes from the text between the tags
 
 export default GenrePickerForm
