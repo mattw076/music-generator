@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import styles from './GenrePickerForm.module.scss';
 
 import spotifyData from "./SpotifyData.js";
@@ -9,14 +9,15 @@ const GenrePickerForm = (props) => {
 
     const [formData, setFormData] = useState({
         genre: "",
-        energy: "" 
+        energy: "",
+        isPopular: ""
     });
     // best practice to keep form data in an object and use a single piece of state for it (rather than one state for each input)
-    
+
     console.log(formData);
 
     const handleChange = (e) => {
-        const {name, value, type, checked } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData(prevFormData => {
             return {
                 ...prevFormData,
@@ -46,9 +47,37 @@ const GenrePickerForm = (props) => {
 
     return (
         <form className={styles.form} >
-            <input className={styles.input} type="text" placeholder="Genre" onChange={handleChange} name="genre" value={formData.genre}/>
-            <input className={styles.input} type="number" placeholder="Energy" min="0" max="100" onChange={handleChange} name="energy" value={formData.energy}/>
-            <button className={styles.button} onClick={handleClick}>Get song</button>
+            <input
+                className={styles.input}
+                type="text"
+                placeholder="Genre"
+                onChange={handleChange}
+                name="genre"
+                value={formData.genre}
+            />
+            <input
+                className={styles.input}
+                type="number"
+                placeholder="Energy"
+                min="0"
+                max="100"
+                onChange={handleChange}
+                name="energy"
+                value={formData.energy}
+            />
+            <label htmlFor="popular">Show only popular songs</label>
+            <input
+                className={styles.input}
+                type="checkbox"
+                id="popular"
+                onChange={handleChange}
+                name="isPopular"
+                checked={formData.isPopular}
+            />
+            <button
+                className={styles.button}
+                onClick={handleClick}>Get song
+            </button>
         </form>
     )
 }
