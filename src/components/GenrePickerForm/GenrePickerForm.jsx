@@ -27,11 +27,14 @@ const GenrePickerForm = (props) => {
         });
     }
 
-    const handleClick = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log(formData);
+
         // TODO: get API key
-        // TODO: get form values to send in API call
-    
+        // TODO: send form values in API call
+
         // const response = await fetch("https://api.spotify.com/v1/recommendations?limit=1&seed_genres=drum-and-bass&target_energy=0.3");
         // const songJson = await response.json();
         const songJson = spotifyData;
@@ -45,15 +48,15 @@ const GenrePickerForm = (props) => {
         // 3. append to history array (unshift)
     };
 
+
     // TODO: get list of genres using GET /recommendations/available-genre-seeds
     const genres = ["drum-and-bass", "indie-rock", "hip-hop"];
-
     const genreSelectOptions = genres.map(genre => <option value={genre}>{genre}</option>);
 
     console.log(formData);
 
     return (
-        <form className={styles.form} >
+        <form className={styles.form} onSubmit={handleSubmit}>
             <select
                 className={styles.input}
                 placeholder="Genre"
@@ -78,17 +81,7 @@ const GenrePickerForm = (props) => {
                 value={formData.energy}
             />
 
-            <label htmlFor="popular">Show only popular songs</label>
-            <input
-                className={styles.input}
-                type="checkbox"
-                id="popular"
-                onChange={handleChange}
-                name="isPopular"
-                checked={formData.isPopular}
-            />
-
-            <label>
+            <label className={styles.vibe}>
                 <div>Vibe: </div>
                 <input
                     type="radio"
@@ -128,10 +121,19 @@ const GenrePickerForm = (props) => {
                 <label htmlFor="random">Random</label>
             </label>
 
-            <button
-                className={styles.button}
-                onClick={handleClick}>Get song
-            </button>
+            <label class={styles.checkbox}>Show only popular songs
+                <input
+                    type="checkbox"
+                    onChange={handleChange}
+                    name="isPopular"
+                    checked={formData.isPopular}
+                />
+                <span></span>
+
+            </label>
+
+            <button className={styles.button}>Get song</button>
+            {/* Button is inside a form so automatically has type="submit" and will make use of the form's onSubmit */}
         </form>
     )
 }

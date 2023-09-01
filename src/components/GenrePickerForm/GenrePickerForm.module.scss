@@ -9,13 +9,58 @@
         border-radius: 5px;
         border: 1px solid rgb(207, 124, 164);
         text-indent: 5px;
+        height: 2.5em;
     }
 
-    .button {
-        grid-column: 1 / -1; // spans entire grid (from very beginning to very end of grid)
-        border-radius: 5px;
-        background-color: rgb(216, 202, 209);
-        border: none;
-        cursor: pointer;
+    // TODO: vibe styling
+
+    //// Checkbox styling
+    .checkbox {
+
+        input {
+            display: none;
+        }
+
+        span {
+            display: inline-block;
+            border: 2px solid rgb(207, 124, 164);
+            border-radius: 5px;
+            width: 25px;
+            height: 25px;
+            vertical-align: middle;
+            margin: 10px;
+            position: relative;
+            transition: width 0.1s, height 0.1s, margin 0.1s;
+        }
+
+        // selector for a span that is adjacent sibling to input:checked
+        :checked+span {
+            background: rgb(210, 0, 102);
+            width: 27px;
+            height: 27px;
+            margin: 2px;
+            border: none;
+            margin: 10px;
+        }
+
+        :checked+span:after {
+            content: '\2714';
+            font-size: 20px;
+            position: absolute;
+            top: -2px;
+            left: 5px;
+            color: white;
+        }
+
     }
-}
+
+        .button {
+            grid-column: 1 / -1; // spans entire grid (from very beginning to very end of grid)
+            border-radius: 5px;
+            background-color: rgb(216, 202, 209);
+            border: none;
+            height: 3em;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    }

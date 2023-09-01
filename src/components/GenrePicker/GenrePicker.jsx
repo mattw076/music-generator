@@ -71,6 +71,8 @@ const GenrePicker = () => {
     )
 
     // TODO: update History every time you fetch a new song
+
+    // TODO: add genre name to song and history items
 }
 
 export default GenrePicker
