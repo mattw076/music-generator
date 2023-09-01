@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './GenrePickerForm.module.scss';
 
 import spotifyData from "./SpotifyData.js";
@@ -6,6 +6,57 @@ import spotifyData from "./SpotifyData.js";
 const GenrePickerForm = (props) => {
 
     const { setSong } = props;
+
+    /*
+    React is responsible for: 
+    1. working with the DOM/browser to render UI
+    2. managing state between render cycles (values are rememebred from one render to the the next)
+    3. keep UI updated whenever state changes occur
+    
+    Side effects are things which live outside of React's reach, e.g. localStorage, API/database interactions, subscriptions (e.g. web sockets), syncing 2 different internal states together)
+    We use the effect hook to interact outside of React:
+    
+    */
+
+    const [genres, setGenres] = useState(["drum-and-bass", "indie-rock", "hip-hop"]);
+
+    useEffect(() => {
+        // TODO: request Spotify API token (expires every 60mins, what's the best way to do it?)
+        
+        fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds")
+        .then(res => res.json())
+        .then(data => {
+            if (data.genres) {
+                setGenres(data.genres);
+            }
+        })
+
+        /*
+        When using async/await, remember: The callback function passed to useEffect cannot be async since it needs to return the cleanup function (not a promise)
+        Instead define an async function inside the callback and run it immediately.
+
+        // const getGenres = async() => {
+        //     const response = await fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds");
+        //     const genresJson = await response.json();
+        //     setGenres(genresJson.genres);
+        // }
+        // getGenres();
+
+        The function returned by useEffect is a cleanup function which runs when the component is destroyed (e.g. to remove event listeners)
+        // return () => {
+        //     console.log("Cleanup run for GenrePickerForm");
+        // }
+        
+        */
+
+    }, []);
+    // Without a second parameter, the callback passed to useEffect will run as if outside useEffect, after the elements are rendered
+    // the second parameter (the dependencies array) contains values which when changed will cause the effect to run
+    // an empty dependencies array means the effect will only run on the first time the component loads (rather than getting stuck in a loop where new data fetched causes re-render which cause new data fetched...)
+
+
+    const genreSelectOptions = genres.map(genre => <option value={genre}>{genre}</option>);
+
 
     // Best practice to keep form data in an object and use a single piece of state for it (rather than one state for each input)
     const [formData, setFormData] = useState({
@@ -31,13 +82,14 @@ const GenrePickerForm = (props) => {
         e.preventDefault();
 
         console.log(formData);
-
-        // TODO: get API key
+        
         // TODO: send form values in API call
 
         // const response = await fetch("https://api.spotify.com/v1/recommendations?limit=1&seed_genres=drum-and-bass&target_energy=0.3");
         // const songJson = await response.json();
         const songJson = spotifyData;
+
+
         setSong(prevSong => ({
             ...prevSong,
             URI: `https://open.spotify.com/embed/track/${songJson.tracks[0].id}`
@@ -48,12 +100,6 @@ const GenrePickerForm = (props) => {
         // 3. append to history array (unshift)
     };
 
-
-    // TODO: get list of genres using GET /recommendations/available-genre-seeds
-    const genres = ["drum-and-bass", "indie-rock", "hip-hop"];
-    const genreSelectOptions = genres.map(genre => <option value={genre}>{genre}</option>);
-
-    console.log(formData);
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -93,7 +139,7 @@ const GenrePickerForm = (props) => {
                     />
                     <span></span>
                     Danceable
-                    </label>
+                </label>
 
                 <label>
                     <input
@@ -102,7 +148,7 @@ const GenrePickerForm = (props) => {
                         value="acoustic"
                         checked={formData.vibe === "acoustic"}
                         onChange={handleChange}
-                        />
+                    />
                     <span></span>
                     Acoustic
                 </label>
@@ -114,7 +160,7 @@ const GenrePickerForm = (props) => {
                         value="instrumental"
                         checked={formData.vibe === "instrumental"}
                         onChange={handleChange}
-                        />
+                    />
                     <span></span>
                     Instrumental
                 </label>
@@ -126,14 +172,14 @@ const GenrePickerForm = (props) => {
                         value="random"
                         checked={formData.vibe === "random"}
                         onChange={handleChange}
-                        />
+                    />
                     <span></span>
-                Random
+                    Random
                 </label>
-                
+
             </span>
 
-            <label class={styles.checkbox}>Show only popular songs
+            <label className={styles.checkbox}>Show only popular songs
                 <input
                     type="checkbox"
                     onChange={handleChange}
