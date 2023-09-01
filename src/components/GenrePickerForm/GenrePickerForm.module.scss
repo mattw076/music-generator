@@ -12,9 +12,52 @@
         height: 2.5em;
     }
 
-    // TODO: vibe styling
+    .vibe {
 
-    //// Checkbox styling
+        padding-top: 12px;
+
+        label {
+            margin-left: 10px;
+        }
+
+        input {
+            display: none;
+        }
+
+        label:first-of-type {
+            margin-left: 26px;
+        }
+
+        span {
+            display: inline-block;
+            border: 2px solid rgb(216, 202, 209);
+            border-radius: 50%;
+            margin: 0px 6px 0px 6px;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            position: relative;
+            transition: width 0.1s, height 0.1s, margin 0.1s;
+        }
+
+        // selector for a span that is adjacent sibling to input:checked
+        :checked+span {
+            width: 20px;
+            height: 20px;
+            margin: 0px 6px 0px 6px;
+            border: 2px solid rgb(210, 0, 102);
+        }
+
+        :checked+span:after {
+            content: "\25CF";
+            color: rgb(210, 0, 102);
+            font-size: 20px;
+            position: absolute;
+            top: -5px;
+            left: 2px;
+        }
+    }
+
     .checkbox {
 
         input {
@@ -23,7 +66,7 @@
 
         span {
             display: inline-block;
-            border: 2px solid rgb(207, 124, 164);
+            border: 2px solid rgb(216, 202, 209);
             border-radius: 5px;
             width: 25px;
             height: 25px;
@@ -36,8 +79,8 @@
         // selector for a span that is adjacent sibling to input:checked
         :checked+span {
             background: rgb(210, 0, 102);
-            width: 27px;
-            height: 27px;
+            width: 25px;
+            height: 25px;
             margin: 2px;
             border: none;
             margin: 10px;
@@ -54,13 +97,14 @@
 
     }
 
-        .button {
-            grid-column: 1 / -1; // spans entire grid (from very beginning to very end of grid)
-            border-radius: 5px;
-            background-color: rgb(216, 202, 209);
-            border: none;
-            height: 3em;
-            cursor: pointer;
-            font-size: 16px;
-        }
+    .button {
+        grid-column: 1 / -1; // spans entire grid (from very beginning to very end of grid)
+        border-radius: 5px;
+        background-color: rgb(216, 202, 209);
+        border: none;
+        height: 3em;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 2px;
     }
+}

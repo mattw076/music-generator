@@ -81,45 +81,57 @@ const GenrePickerForm = (props) => {
                 value={formData.energy}
             />
 
-            <label className={styles.vibe}>
-                <div>Vibe: </div>
-                <input
-                    type="radio"
-                    id="danceable"
-                    name="vibe"
-                    value="danceable"
-                    checked={formData.vibe === "danceable"}
-                    onChange={handleChange}
-                />
-                <label htmlFor="danceable">Danceable</label>
-                <input
-                    type="radio"
-                    id="acoustic"
-                    name="vibe"
-                    value="acoustic"
-                    checked={formData.vibe === "acoustic"}
-                    onChange={handleChange}
-                />
-                <label htmlFor="acoustic">Acoustic</label>
-                <input
-                    type="radio"
-                    id="instrumental"
-                    name="vibe"
-                    value="instrumental"
-                    checked={formData.vibe === "instrumental"}
-                    onChange={handleChange}
-                />
-                <label htmlFor="instrumental">Instrumental</label>
-                <input
-                    type="radio"
-                    id="random"
-                    name="vibe"
-                    value="random"
-                    checked={formData.vibe === "random"}
-                    onChange={handleChange}
-                />
-                <label htmlFor="random">Random</label>
-            </label>
+            <span className={styles.vibe}>Vibe:
+
+                <label>
+                    <input
+                        type="radio"
+                        name="vibe"
+                        value="danceable"
+                        checked={formData.vibe === "danceable"}
+                        onChange={handleChange}
+                    />
+                    <span></span>
+                    Danceable
+                    </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="vibe"
+                        value="acoustic"
+                        checked={formData.vibe === "acoustic"}
+                        onChange={handleChange}
+                        />
+                    <span></span>
+                    Acoustic
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="vibe"
+                        value="instrumental"
+                        checked={formData.vibe === "instrumental"}
+                        onChange={handleChange}
+                        />
+                    <span></span>
+                    Instrumental
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="vibe"
+                        value="random"
+                        checked={formData.vibe === "random"}
+                        onChange={handleChange}
+                        />
+                    <span></span>
+                Random
+                </label>
+                
+            </span>
 
             <label class={styles.checkbox}>Show only popular songs
                 <input
