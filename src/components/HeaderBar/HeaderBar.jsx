@@ -26,7 +26,7 @@ return (
         <img className={styles.logo} src={logo} />
         <h2 className={styles.title}>Music Generator</h2>
         <h4 className={styles.subheading}>Discover new genres</h4>
-        <a href={loginUrl} className={styles.login}>Log in to Spotify</a>
+        <a className={styles.login} href={loginUrl} >Log in to Spotify</a>
     </header>
 )
 }

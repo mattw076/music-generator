@@ -24,5 +24,16 @@
         // "relative to root element" - i.e. 12px
         font-weight: 500;
         margin-left: auto;
+        padding: 12px;
+    }
+
+    >.login {
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 2px 6px 2px 6px;
+        border: 1px solid #333333;
+        box-shadow: 2px 1px 1px 333333;      
+        border-radius: 8px;
+        text-decoration: none;
     }
 }

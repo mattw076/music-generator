@@ -37,7 +37,7 @@ const GenrePickerForm = (props) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.genres) {
+                    if (data && data.genres) {
                         setGenres(data.genres);
                     }
                 })
@@ -92,23 +92,35 @@ const GenrePickerForm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(formData);
+        const { energy, vibe, genre, isPopular } = formData;
 
-        // TODO: send form values in API call
+        //const data = spotifyData;
 
-        // const response = await fetch("https://api.spotify.com/v1/recommendations?limit=1&seed_genres=drum-and-bass&target_energy=0.3");
-        // const songJson = await response.json();
-        const songJson = spotifyData;
+        let genreSeed = (genre === "random") ? genres[Math.floor(Math.random()*genres.length)] : genre;
 
-
-        setSong(prevSong => ({
-            ...prevSong,
-            URI: `https://open.spotify.com/embed/track/${songJson.tracks[0].id}`
-        }));
-
-        // 1. API call
-        // 2. set state
-        // 3. append to history array (unshift)
+        const token = getTokenFromUrl();
+        if (token) {
+            fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energy/100}&min_instrumentalness=${ vibe === "instrumental" ? 0.7 : 0 }&min_acousticness=${ vibe === "acoustic" ? 0.7 : 0 }&min_danceability=${ vibe === "danceable" ? 0.7 : 0 }&min_popularity=${ isPopular ? 0.7 : 0 }`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.tracks && data.tracks[0]) {
+                        setSong(prevSong => ({
+                            ...prevSong,
+                            URI: `https://open.spotify.com/embed/track/${data.tracks[0].id}`
+                        }));
+                    } else {
+                        window.alert("No matching songs found. Try some different search parameters!")
+                    }
+                })
+        } else {
+            window.alert("Please log in to Spotify (top right) before generating songs :)")
+        }
+        
+        // TODO: append to history array (with unshift)
     };
 
 
@@ -219,3 +231,4 @@ export default GenrePickerForm
 
 
 // TODO: only allow value between 1 and 100 for energy
+// TODO: form validation?
