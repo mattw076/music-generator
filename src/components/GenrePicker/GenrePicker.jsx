@@ -72,6 +72,8 @@ const GenrePicker = () => {
 
     // TODO: update History every time you fetch a new song
 
+    // TODO: "Nothing to show yet" message when history is empty
+
     // TODO: add genre name to song and history items
 }
 

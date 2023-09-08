@@ -20,28 +20,40 @@ const GenrePickerForm = (props) => {
 
     const [genres, setGenres] = useState(["drum-and-bass", "indie-rock", "hip-hop"]);
 
+
+    const getTokenFromUrl = () => {
+        return (window.location.hash) ? window.location.hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1] : "";
+    }
+
     useEffect(() => {
-        // TODO: request Spotify API token (expires every 60mins, what's the best way to do it?)
-        
-        fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds")
-        .then(res => res.json())
-        .then(data => {
-            if (data.genres) {
-                setGenres(data.genres);
-            }
-        })
+        // TODO: case where token has expired (after 60 mins)
+
+        const token = getTokenFromUrl();
+        if (token) {
+            fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.genres) {
+                        setGenres(data.genres);
+                    }
+                })
+        }
 
         /*
         When using async/await, remember: The callback function passed to useEffect cannot be async since it needs to return the cleanup function (not a promise)
         Instead define an async function inside the callback and run it immediately.
-
+    
         // const getGenres = async() => {
         //     const response = await fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds");
         //     const genresJson = await response.json();
         //     setGenres(genresJson.genres);
         // }
         // getGenres();
-
+    
         The function returned by useEffect is a cleanup function which runs when the component is destroyed (e.g. to remove event listeners)
         // return () => {
         //     console.log("Cleanup run for GenrePickerForm");
@@ -56,7 +68,6 @@ const GenrePickerForm = (props) => {
 
 
     const genreSelectOptions = genres.map(genre => <option value={genre}>{genre}</option>);
-
 
     // Best practice to keep form data in an object and use a single piece of state for it (rather than one state for each input)
     const [formData, setFormData] = useState({
@@ -82,7 +93,7 @@ const GenrePickerForm = (props) => {
         e.preventDefault();
 
         console.log(formData);
-        
+
         // TODO: send form values in API call
 
         // const response = await fetch("https://api.spotify.com/v1/recommendations?limit=1&seed_genres=drum-and-bass&target_energy=0.3");
