@@ -31,4 +31,6 @@ return (
 )
 }
 
+// TODO: change login button to Logged in button once logged in
+
 export default HeaderBar;
