@@ -23,9 +23,11 @@ const GenrePickerHistory = (props) => {
             <h3 className={styles.heading}>History</h3>
             <Toggle isToggled={favouritesToggled} handleChange={handleChangeFavouritesToggled}/>
             {favouritesToggled ? historyItemsFavourited : historyItems}
-            {/* Two below are equivalent to above:
-            {showOnlyFavourites && historyItemsFavourited}
-            {!showOnlyFavourites && historyItems} */}
+            {/* Two below together are equivalent to above:
+            {favouritesToggled && historyItemsFavourited}
+            {!favouritesToggled && historyItems} */}
+            { !favouritesToggled && historyItems.length === 0 && <p className={styles.placeholder}>No song history to display yet.</p> }
+            { favouritesToggled && historyItemsFavourited.length === 0 && <p className={styles.placeholder}>No favourite songs to display yet.</p> }
         </div>
     )
 }

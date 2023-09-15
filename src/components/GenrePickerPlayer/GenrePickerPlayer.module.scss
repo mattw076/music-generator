@@ -1,7 +1,7 @@
 .player {
 
     .song {
-        border-radius: 12px;
+        border-style: none;
         margin-top: 36px;
     }
     
@@ -11,4 +11,8 @@
     text-align: center;
     margin-top: 10px;
     margin-bottom: 2px;
+}
+
+.genre {
+    text-align: center;
 }

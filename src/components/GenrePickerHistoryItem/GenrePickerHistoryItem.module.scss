@@ -8,13 +8,20 @@
 
     & .song {
 
-        width: 95%;
-        border-radius: 12px;
+        width: 90%;
+        border-style: none;
         display: inline-block;
     }
 }
 
 .historyStar {
     display: inline-block;
-    margin-right: 10px;
+    vertical-align: top;
+    margin: 24px 24px 0px 0px;
+}
+
+.genre {
+    display: inline-block;
+    vertical-align: top;
+    margin: 32px;
 }

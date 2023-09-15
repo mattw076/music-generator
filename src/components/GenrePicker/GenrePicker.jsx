@@ -19,7 +19,7 @@ const GenrePicker = () => {
 
     // Generally, it is bad practice to initialise state based on the value of incoming props (e.g. each favourites star intialises its own state based on a "favourite" prop). It is likely better to put state in the parent component in this case. See:
     // https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-    
+
 
     const [history, setHistory] = useState([])
 
@@ -41,9 +41,6 @@ const GenrePicker = () => {
         </main>
     )
 
-    // TODO: "Nothing to show yet" message when history is empty
-
-    // TODO: add genre name to song and history items
 }
 
 export default GenrePicker
