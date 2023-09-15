@@ -5,7 +5,9 @@ import Star from '../Star/Star.jsx';
 
 const GenrePickerPlayer = (props) => {
 
-    const { song, history, handleClickStar } = props;
+    const { history, handleClickStar } = props;
+
+    const song = history[0];
 
     return (
         <div className={styles.player}>
@@ -14,6 +16,8 @@ const GenrePickerPlayer = (props) => {
         </div>
     )
 }
+
+// TODO: add genre to the song card
 
 export default GenrePickerPlayer
 

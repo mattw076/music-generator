@@ -5,7 +5,7 @@ import spotifyData from "./SpotifyData.js";
 
 const GenrePickerForm = (props) => {
 
-    const { setSong } = props;
+    const { setHistory } = props;
 
     /*
     React is responsible for: 
@@ -67,7 +67,7 @@ const GenrePickerForm = (props) => {
     // an empty dependencies array means the effect will only run on the first time the component loads (rather than getting stuck in a loop where new data fetched causes re-render which cause new data fetched...)
 
 
-    const genreSelectOptions = genres.map(genre => <option value={genre}>{genre}</option>);
+    const genreSelectOptions = genres.map(genre => <option key={genre} value={genre}>{genre}</option>);
 
     // Best practice to keep form data in an object and use a single piece of state for it (rather than one state for each input)
     const [formData, setFormData] = useState({
@@ -96,11 +96,13 @@ const GenrePickerForm = (props) => {
 
         //const data = spotifyData;
 
-        let genreSeed = (genre === "random") ? genres[Math.floor(Math.random()*genres.length)] : genre;
+        let genreSeed = (genre === "random") ? genres[Math.floor(Math.random() * genres.length)] : genre;
+
+        // TODO: avoid repeat songs
 
         const token = getTokenFromUrl();
         if (token) {
-            fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energy/100}&min_instrumentalness=${ vibe === "instrumental" ? 0.7 : 0 }&min_acousticness=${ vibe === "acoustic" ? 0.7 : 0 }&min_danceability=${ vibe === "danceable" ? 0.7 : 0 }&min_popularity=${ isPopular ? 0.7 : 0 }`, {
+            fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energy / 100}&min_instrumentalness=${vibe === "instrumental" ? 0.7 : 0}&min_acousticness=${vibe === "acoustic" ? 0.7 : 0}&min_danceability=${vibe === "danceable" ? 0.7 : 0}&min_popularity=${isPopular ? 0.7 : 0}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -108,10 +110,16 @@ const GenrePickerForm = (props) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data && data.tracks && data.tracks[0]) {
-                        setSong(prevSong => ({
-                            ...prevSong,
-                            URI: `https://open.spotify.com/embed/track/${data.tracks[0].id}`
-                        }));
+
+                        setHistory(prevHistory => [
+                            {
+                                genre: genreSeed,
+                                URI: `https://open.spotify.com/embed/track/${data.tracks[0].id}`,
+                                favourite: false,
+                            },
+                            ...prevHistory
+                        ]);
+
                     } else {
                         window.alert("No matching songs found. Try some different search parameters!")
                     }
@@ -119,8 +127,7 @@ const GenrePickerForm = (props) => {
         } else {
             window.alert("Please log in to Spotify (top right) before generating songs :)")
         }
-        
-        // TODO: append to history array (with unshift)
+
     };
 
 
@@ -132,7 +139,6 @@ const GenrePickerForm = (props) => {
                 onChange={handleChange}
                 name="genre"
                 value={formData.genre}
-                defaultValue=""
             >
                 <option value="" hidden>Select a genre</option>
                 <option value="random">RANDOM</option>

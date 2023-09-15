@@ -31,4 +31,6 @@ return (
 )
 }
 
+// TODO: changed message to "logged in" once logged in
+
 export default HeaderBar;
