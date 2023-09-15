@@ -44,3 +44,5 @@ const GenrePicker = () => {
 }
 
 export default GenrePicker
+
+// TODO: styling (e.g. player)

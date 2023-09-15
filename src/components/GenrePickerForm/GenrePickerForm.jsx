@@ -238,3 +238,5 @@ export default GenrePickerForm
 
 // TODO: only allow value between 1 and 100 for energy
 // TODO: form validation?
+
+// TODO: target energy defaults to 0 and causes weird suggwstions
