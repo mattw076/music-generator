@@ -28,6 +28,8 @@ const GenrePickerForm = (props) => {
     useEffect(() => {
         // TODO: case where token has expired (after 60 mins)
 
+        // MATT: here - see saved links for how to set this up
+
         const token = getTokenFromUrl();
         if (token) {
             fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {

@@ -7,7 +7,11 @@ const HeaderBar = () => {
 
     const authEndpoint = "https://accounts.spotify.com/authorize";
     const redirectUri = "http://localhost:3000/"
-    const clientId = "6b11aa4cf77c4dbcaa02b134f080bfd6";
+    const clientId = process.env.REACT_APP_CLIENT_ID
+    // TODO: get this id from backend instead?
+
+    // TODO: the below shouldn't be visible to react as it is secret? How to hide it
+    console.log(process.env.CLIENT_SECRET);
 
     const scopes = [
         "user-read-playback-state",
