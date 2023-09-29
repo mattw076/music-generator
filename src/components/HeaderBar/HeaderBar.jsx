@@ -5,26 +5,14 @@ import logo from "../../images/music-logo.png";
 
 const HeaderBar = () => {
 
-    const authEndpoint = "https://accounts.spotify.com/authorize";
-    const redirectUri = "http://localhost:3000/"
-    const clientId = process.env.REACT_APP_CLIENT_ID
-    // TODO: get this id from backend instead?
-
     // TODO: the below shouldn't be visible to react as it is secret? How to hide it
     console.log(process.env.CLIENT_SECRET);
 
-    const scopes = [
-        "user-read-playback-state",
-        "user-modify-playback-state",
-        "user-read-currently-playing",
-        "user-read-playback-position",
-        "user-library-modify",
-        "user-library-read"
-    ]
 
-    const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&show_dialog=true`;
+    // TODO: check this works
+    const loginUrl = process.env.APP_URL + "login";
 
-
+    
 return (
     <header className={styles.headerBar}>
         <img className={styles.logo} src={logo} />
