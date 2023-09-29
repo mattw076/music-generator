@@ -8,10 +8,7 @@ const HeaderBar = () => {
     // TODO: the below shouldn't be visible to react as it is secret? How to hide it
     console.log(process.env.CLIENT_SECRET);
 
-
-    // TODO: check this works
     const loginUrl = process.env.APP_URL + "login";
-
     
 return (
     <header className={styles.headerBar}>

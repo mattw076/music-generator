@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv').config();
-//const axios = require('axios');
+const axios = require('axios');
+const crypto = require('crypto');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,42 +38,98 @@ app.listen(port, function () {
  console.log('App listening on port: ' + port);
 });
 
+// Initiate log in to Spotify by requesting an authorization code
 app.get('/login', function(req, res) {
   
   const authEndpoint = spotify_url + "authorize?";
+
+  // State is optional, but recommended to protect against cross-site request forgery (we check that the value of state returned by the request is the same as the one we sent)
+  // state is stored in cookies to compare later
+  const state = crypto.randomBytes(8).toString('hex');
+  res.cookie("spotify_auth_state", state);
 
   //var scope = 'user-read-private user-read-email';
 
   res.redirect(authEndpoint +
     new URLSearchParams({
-      response_type: 'code',
       client_id: client_id,
       //scope: scope,
+      //redirect_uri: app_url + "access_token",
       redirect_uri: app_url,
-      response_type: "token",
+      response_type: "code",
+      state: state,
       show_dialog: true
-    }));
+    })
+  );
+});
+
+/**
+ * Get an access token to be used in API calls to Spotify
+ * @param code authorization code received from the /login route
+ * @param state state received back from the /login call
+ * @returns {object} {
+   "access_token": "NgCXRK...MzYjw",
+   "token_type": "Bearer",
+   "scope": "user-read-private user-read-email",
+   "expires_in": 3600,
+   "refresh_token": "NgAagA...Um_SHo"
+  }
+ */
+app.get('/access_token', function(req, res) {
+  
+  const code = req.query.code || null;
+  const state = req.query.state
+  
+  // If state received back is not the same one we sent, display error
+
+  // TODO: cookies is empty for some reason (can see it in the browser though)
+  //if (state === null || state !== req.cookies["spotify_auth_state"]) {
+  if (state === null) {
+    // Q: is below the right route? What does # signify
+    res.redirect('/#' + new URLSearchParams({error: 'state_mismatch'}));
+
+  } else {
+      const endpoint = spotify_url + "api/token";
+      const queryParams = {
+        code: code,
+        redirect_uri: app_url,
+        grant_type: 'authorization_code'
+      };
+      const headers = { 'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')) };
+
+      // get the access token and return repsonse containing access token to client-side
+
+      // TODO: FIRST - this axios request is failing, why??
+      axios.post(endpoint, { params: queryParams, headers: headers })
+      .then(response => {
+        console.log(response);
+        res.send(response);
+      }) 
+      .catch(err => console.log(err));
+  };
+
+  res.clearCookie("spotify_auth_state");
 });
 
 
 
 // app.get('/refresh_token', function(req, res) {
 
-//   var refresh_token = req.query.refresh_token;
-//   var authOptions = {
-//     url: 'https://accounts.spotify.com/api/token',
+//   const refresh_token = req.query.refresh_token;
+
+//   const authOptions = {
 //     headers: { 'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')) },
-//     form: {
+//     params: {
 //       grant_type: 'refresh_token',
 //       refresh_token: refresh_token
-//     },
-//     json: true
+//     }
 //   };
 
-//   // TODO: request is deprecated, use axios instead
-//   request.post(authOptions, function(error, response, body) {
+ 
+//   axios.post(spotify_url + "api/token", authOptions)
+// .then(function(error, response) {
 //     if (!error && response.statusCode === 200) {
-//       var access_token = body.access_token;
+//       const access_token = body.access_token;
 //       res.send({
 //         'access_token': access_token
 //       });

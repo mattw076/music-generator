@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './GenrePicker.module.scss';
 
 import GenrePickerForm from '../GenrePickerForm/GenrePickerForm.jsx';
@@ -22,6 +22,32 @@ const GenrePicker = () => {
 
 
     const [history, setHistory] = useState([])
+
+
+    useEffect(() => {
+        
+        const urlParams = new URLSearchParams(location.search);
+
+        if (urlParams.size > 0) {
+
+            fetch(process.env.APP_URL + "access_token?" + urlParams)
+            .then(res => {
+                console.log(res);
+                localStorage.setItem("spotify_token", res.access_token);
+                localStorage.setItem("refresh_token", res.refresh_token);
+                
+                setTimeout(res.expires_in * 1000, () => {
+                    // TODO: call /refresh_token here
+                });
+                
+            })
+        }
+
+    });
+    // TODO: what to put in the useEffect dependencies array in this case?
+
+
+
 
     // handleClickStar takes the id of the particular history item component
     const handleClickStar = (id) => {

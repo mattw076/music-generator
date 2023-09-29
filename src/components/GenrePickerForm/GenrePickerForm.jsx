@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './GenrePickerForm.module.scss';
 
-import spotifyData from "./SpotifyData.js";
+// import spotifyData from "./SpotifyData.js";
 
 const GenrePickerForm = (props) => {
 
@@ -21,16 +21,12 @@ const GenrePickerForm = (props) => {
     const [genres, setGenres] = useState(["drum-and-bass", "indie-rock", "hip-hop"]);
 
 
-    const getTokenFromUrl = () => {
-        return (window.location.hash) ? window.location.hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1] : "";
-    }
-
     useEffect(() => {
         // TODO: case where token has expired (after 60 mins)
 
-        // MATT: here - see saved links for how to set this up
+        //const token = getTokenFromUrl();
+        const token = localStorage.getItem('spotify_token');
 
-        const token = getTokenFromUrl();
         if (token) {
             fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
                 headers: {
