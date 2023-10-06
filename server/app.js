@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv').config();
-const axios = require('axios');
+const fetch = require("node-fetch");
 const crypto = require('crypto');
+const { URL } = require('url');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -95,15 +96,15 @@ app.get('/access_token', function(req, res) {
         redirect_uri: app_url,
         grant_type: 'authorization_code'
       };
-      const headers = { 'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')) };
+      const headers = { 'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')), "Content-Type": 'application/x-www-form-urlencoded' };
 
       // get the access token and return repsonse containing access token to client-side
-
-      // TODO: FIRST - this axios request is failing, why??
-      axios.post(endpoint, { params: queryParams, headers: headers })
+      fetch(endpoint, { method: "POST", headers: headers, body: new URLSearchParams(queryParams) })
       .then(response => {
-        console.log(response);
-        res.send(response);
+        response.json().then(data => {
+          // console.log(data);
+          res.send(data);
+        })
       }) 
       .catch(err => console.log(err));
   };
@@ -112,6 +113,7 @@ app.get('/access_token', function(req, res) {
 });
 
 
+// TODO: *first* - refresh_token
 
 // app.get('/refresh_token', function(req, res) {
 

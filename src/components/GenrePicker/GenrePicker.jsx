@@ -32,13 +32,17 @@ const GenrePicker = () => {
 
             fetch(process.env.APP_URL + "access_token?" + urlParams)
             .then(res => {
-                console.log(res);
-                localStorage.setItem("spotify_token", res.access_token);
-                localStorage.setItem("refresh_token", res.refresh_token);
+                res.json().then(data => {
+                    console.log(data);
+                    localStorage.setItem("spotify_token", data.access_token);
+                    localStorage.setItem("refresh_token", data.refresh_token);
+
+                    setTimeout(data.expires_in * 1000, () => {
+                        // TODO: call /refresh_token here
+                    });
+                })
                 
-                setTimeout(res.expires_in * 1000, () => {
-                    // TODO: call /refresh_token here
-                });
+                
                 
             })
         }
