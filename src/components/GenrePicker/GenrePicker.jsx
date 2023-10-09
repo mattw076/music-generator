@@ -6,7 +6,9 @@ import GenrePickerPlayer from '../GenrePickerPlayer/GenrePickerPlayer.jsx';
 import GenrePickerHistory from '../GenrePickerHistory/GenrePickerHistory.jsx';
 
 
-const GenrePicker = () => {
+const GenrePicker = (props) => {
+
+    const { spotifyToken, setSpotifyToken } = props;
 
 
     // useState(initialStateValue), returns array [ stateValue, setStateValue ]
@@ -36,14 +38,6 @@ const GenrePicker = () => {
                 });
         }, expiresIn * 1000);
     }
-
-    const [spotifyToken, setSpotifyToken] = useState(
-        document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || ""
-    );
-
-    useEffect(() => {
-        document.cookie = `spotify_token=${spotifyToken}`;
-    }, [spotifyToken]);
 
 
     useEffect(() => {
