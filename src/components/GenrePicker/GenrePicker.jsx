@@ -24,33 +24,47 @@ const GenrePicker = () => {
     const [history, setHistory] = useState([])
 
 
+    // TODO: check this works
+    // Refresh the Spotify token every hour
+    const refreshToken = (expiresIn, refreshToken) => {
+        setTimeout(expiresIn * 1000, () => {
+            fetch(process.env.APP_URL + "refresh_token?" + refreshToken)
+                .then(res => {
+                    res.json().then(data => {
+                        setSpotifyToken(data.access_token);
+                        refreshToken(data.expires_in, refreshToken);
+                    });
+                });
+
+        });
+    }
+
+    const [spotifyToken, setSpotifyToken] = useState(
+        document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || ""
+    );
+
     useEffect(() => {
-        
+        document.cookie = `spotify_token=${spotifyToken}`;
+    }, [spotifyToken]);
+
+
+    useEffect(() => {
+
         const urlParams = new URLSearchParams(location.search);
 
-        if (urlParams.size > 0) {
+        if (urlParams.size > 0 && !spotifyToken) {
 
             fetch(process.env.APP_URL + "access_token?" + urlParams)
-            .then(res => {
-                res.json().then(data => {
-                    console.log(data);
-                    localStorage.setItem("spotify_token", data.access_token);
-                    localStorage.setItem("refresh_token", data.refresh_token);
-
-                    setTimeout(data.expires_in * 1000, () => {
-                        // TODO: call /refresh_token here
-                    });
-                })
-                
-                
-                
-            })
+                .then(res => {
+                    res.json().then(data => {
+                        setSpotifyToken(data.access_token);
+                        localStorage.setItem("refresh_token", data.refresh_token);
+                        refreshToken(data.expires_in, data.refresh_token);
+                    })
+                });
         }
 
-    });
-    // TODO: what to put in the useEffect dependencies array in this case?
-
-
+    }, []);
 
 
     // handleClickStar takes the id of the particular history item component
@@ -65,9 +79,9 @@ const GenrePicker = () => {
 
     return (
         <main className={styles.genrePicker}>
-            <GenrePickerForm setHistory={setHistory}/>
-            {history && history[0] && <GenrePickerPlayer history={history} handleClickStar={handleClickStar}/>}
-            <GenrePickerHistory history={history} handleClickStar={handleClickStar}/>
+            <GenrePickerForm setHistory={setHistory} />
+            {history && history[0] && <GenrePickerPlayer history={history} handleClickStar={handleClickStar} />}
+            <GenrePickerHistory history={history} handleClickStar={handleClickStar} />
         </main>
     )
 

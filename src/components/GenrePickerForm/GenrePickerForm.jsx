@@ -24,8 +24,7 @@ const GenrePickerForm = (props) => {
     useEffect(() => {
         // TODO: case where token has expired (after 60 mins)
 
-        //const token = getTokenFromUrl();
-        const token = localStorage.getItem('spotify_token');
+        const token = document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || "";
 
         if (token) {
             fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
@@ -98,7 +97,7 @@ const GenrePickerForm = (props) => {
 
         // TODO: avoid repeat songs
 
-        const token = getTokenFromUrl();
+        const token = document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || "";
         if (token) {
             fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energy / 100}&min_instrumentalness=${vibe === "instrumental" ? 0.7 : 0}&min_acousticness=${vibe === "acoustic" ? 0.7 : 0}&min_danceability=${vibe === "danceable" ? 0.7 : 0}&min_popularity=${isPopular ? 0.7 : 0}`, {
                 headers: {
