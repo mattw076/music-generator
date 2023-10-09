@@ -14,6 +14,8 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
     filename: "[name].[contenthash].css"
 });
 
+// TODO: ofuscate webpack code (for production version, not dev)
+
 module.exports = {
     entry: "./src/index.js",
     output: {

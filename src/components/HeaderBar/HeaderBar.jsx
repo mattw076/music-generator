@@ -10,10 +10,6 @@ const HeaderBar = (props) => {
 
     const { spotifyToken, setSpotifyToken } = props;
 
-    // TODO: the below shouldn't be visible to react as it is secret? How to hide it
-    console.log(process.env.CLIENT_SECRET);
-
-
     return (
         <header className={styles.headerBar}>
             <img className={styles.logo} src={logo} />
