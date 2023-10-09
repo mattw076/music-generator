@@ -23,20 +23,18 @@ const GenrePicker = () => {
 
     const [history, setHistory] = useState([])
 
-
-    // TODO: check this works
     // Refresh the Spotify token every hour
     const refreshToken = (expiresIn, refreshToken) => {
-        setTimeout(expiresIn * 1000, () => {
-            fetch(process.env.APP_URL + "refresh_token?" + refreshToken)
+        setTimeout(() => {
+            const urlParams = new URLSearchParams({refresh_token: refreshToken});
+            fetch(process.env.APP_URL + "refresh_token?" + urlParams)
                 .then(res => {
                     res.json().then(data => {
                         setSpotifyToken(data.access_token);
                         refreshToken(data.expires_in, refreshToken);
                     });
                 });
-
-        });
+        }, expiresIn * 1000);
     }
 
     const [spotifyToken, setSpotifyToken] = useState(

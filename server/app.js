@@ -115,9 +115,6 @@ app.get('/access_token', function (req, res) {
   res.clearCookie("spotify_auth_state");
 });
 
-
-// TODO: *first* - refresh_token
-
 app.get('/refresh_token', function (req, res) {
 
   const refresh_token = req.query.refresh_token || null;
@@ -125,10 +122,8 @@ app.get('/refresh_token', function (req, res) {
   const endpoint = spotify_url + "api/token";
 
   const queryParams = {
-    params: {
-      grant_type: 'refresh_token',
-      refresh_token: refresh_token
-    }
+      refresh_token: refresh_token,
+      grant_type: 'refresh_token'
   };
 
   const headers = {
@@ -136,11 +131,11 @@ app.get('/refresh_token', function (req, res) {
     "Content-Type": 'application/x-www-form-urlencoded'
   };
 
+  console.log(endpoint + "?" + new URLSearchParams(queryParams));
 
   fetch(endpoint, { method: "POST", headers: headers, body: new URLSearchParams(queryParams) })
     .then(response => {
       response.json().then(data => {
-        console.log(data);
         res.send(data);
       });
     })

@@ -21,8 +21,8 @@ const GenrePickerForm = (props) => {
     const [genres, setGenres] = useState(["drum-and-bass", "indie-rock", "hip-hop"]);
 
 
+    // TODO: make this depend on spotifyToken state variable
     useEffect(() => {
-        // TODO: case where token has expired (after 60 mins)
 
         const token = document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || "";
 
