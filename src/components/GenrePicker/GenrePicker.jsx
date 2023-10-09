@@ -77,7 +77,7 @@ const GenrePicker = () => {
 
     return (
         <main className={styles.genrePicker}>
-            <GenrePickerForm setHistory={setHistory} />
+            <GenrePickerForm setHistory={setHistory} spotifyToken={spotifyToken}/>
             {history && history[0] && <GenrePickerPlayer history={history} handleClickStar={handleClickStar} />}
             <GenrePickerHistory history={history} handleClickStar={handleClickStar} />
         </main>

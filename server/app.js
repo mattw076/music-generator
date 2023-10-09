@@ -3,7 +3,6 @@ const path = require('path');
 const dotenv = require('dotenv').config();
 const fetch = require("node-fetch");
 const crypto = require('crypto');
-const { URL } = require('url');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,10 +13,6 @@ const mockResponse = {
   bar: 'foo'
 };
 app.use(express.static(DIST_DIR));
-
-// app.use(express.json());
-// app.use(express.static("public"));
-// app.use(express.static("dist"));
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
@@ -100,12 +95,9 @@ app.get('/access_token', function (req, res) {
 
     // get the access token and return repsonse containing access token to client-side
     fetch(endpoint, { method: "POST", headers: headers, body: new URLSearchParams(queryParams) })
-      .then(response => {
-        response.json().then(data => {
-          res.send(data);
-        })
-      })
-      .catch(err => console.log(err));
+    .then(response => response.json())
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
   };
 
   res.clearCookie("spotify_auth_state");
@@ -130,11 +122,7 @@ app.get('/refresh_token', function (req, res) {
   console.log(endpoint + "?" + new URLSearchParams(queryParams));
 
   fetch(endpoint, { method: "POST", headers: headers, body: new URLSearchParams(queryParams) })
-    .then(response => {
-      response.json().then(data => {
-        res.send(data);
-      });
-    })
+    .then(response => response.json())
+    .then(data => res.send(data))
     .catch(err => console.log(err));
-
 });

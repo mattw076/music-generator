@@ -5,7 +5,7 @@ import styles from './GenrePickerForm.module.scss';
 
 const GenrePickerForm = (props) => {
 
-    const { setHistory } = props;
+    const { setHistory, spotifyToken } = props;
 
     /*
     React is responsible for: 
@@ -24,12 +24,10 @@ const GenrePickerForm = (props) => {
     // TODO: make this depend on spotifyToken state variable
     useEffect(() => {
 
-        const token = document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || "";
-
-        if (token) {
+        if (spotifyToken) {
             fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${spotifyToken}`
                 }
             })
                 .then(res => res.json())
@@ -38,6 +36,8 @@ const GenrePickerForm = (props) => {
                         setGenres(data.genres);
                     }
                 })
+                .catch(err => console.log(err));
+
         }
 
         /*
@@ -58,7 +58,7 @@ const GenrePickerForm = (props) => {
         
         */
 
-    }, []);
+    }, [spotifyToken]);
     // Without a second parameter, the callback passed to useEffect will run as if outside useEffect, after the elements are rendered
     // the second parameter (the dependencies array) contains values which when changed will cause the effect to run
     // an empty dependencies array means the effect will only run on the first time the component loads (rather than getting stuck in a loop where new data fetched causes re-render which cause new data fetched...)
