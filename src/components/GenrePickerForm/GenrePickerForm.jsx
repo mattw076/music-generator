@@ -21,7 +21,6 @@ const GenrePickerForm = (props) => {
     const [genres, setGenres] = useState(["drum-and-bass", "indie-rock", "hip-hop"]);
 
 
-    // TODO: make this depend on spotifyToken state variable
     useEffect(() => {
 
         if (spotifyToken) {
@@ -119,10 +118,12 @@ const GenrePickerForm = (props) => {
 
                     } else {
                         window.alert("No matching songs found. Try some different search parameters!")
+                        // TODO: make this e.g. a toast instead
                     }
                 })
         } else {
             window.alert("Please log in to Spotify (top right) before generating songs :)")
+            // TODO: make this e.g. info text instead
         }
 
     };
@@ -236,4 +237,4 @@ export default GenrePickerForm
 // TODO: only allow value between 1 and 100 for energy
 // TODO: form validation?
 
-// TODO: target energy defaults to 0 and causes weird suggwstions
+// TODO: target energy defaults to 0 and causes weird suggestions

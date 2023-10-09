@@ -5,7 +5,8 @@ const dotEnv = require('dotenv-webpack');
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: "./src/index.html",
-    filename: "./index.html"
+    filename: "./index.html",
+    favicon: "./src/images/music-logo-icon.ico"
 });
 
 // Create a single scss file from each component's scss file
