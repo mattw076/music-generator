@@ -55,7 +55,6 @@ app.get('/login', function (req, res) {
     new URLSearchParams({
       client_id: client_id,
       //scope: scope,
-      //redirect_uri: app_url + "access_token",
       redirect_uri: app_url,
       response_type: "code",
       state: state,
@@ -82,13 +81,11 @@ app.get('/access_token', function (req, res) {
   const state = req.query.state
 
   // If state received back is not the same one we sent, display error
-
-  // TODO: cookies is empty for some reason (can see it in the browser though)
-  //if (state === null || state !== req.cookies["spotify_auth_state"]) {
-  if (state === null) {
-    // Q: is below the right route? What does # signify
-    res.redirect('/#' + new URLSearchParams({ error: 'state_mismatch' }));
-
+  const stateCookie = req.headers.cookie.split("; ").find((row) => row.startsWith("spotify_auth_state="))?.split("=")[1];
+  if (state === null || state !== stateCookie) {
+    // Q: What does # signify in the example given below
+    // res.redirect('/#' + new URLSearchParams({ error: 'state_mismatch' }));
+    res.redirect('/' + new URLSearchParams({ error: 'state_mismatch' }));
   } else {
     const endpoint = spotify_url + "api/token";
     const queryParams = {
@@ -105,7 +102,6 @@ app.get('/access_token', function (req, res) {
     fetch(endpoint, { method: "POST", headers: headers, body: new URLSearchParams(queryParams) })
       .then(response => {
         response.json().then(data => {
-          // console.log(data);
           res.send(data);
         })
       })
