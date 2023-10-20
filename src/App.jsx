@@ -26,3 +26,7 @@ export default App;
 
 
 // TODO: firefox "Stylesheet could not be loaded" warning
+
+// TODO: other console errors (e.g. source map)
+
+// TODO: deploy - DO SECOND
