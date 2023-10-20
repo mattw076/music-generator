@@ -6,9 +6,6 @@ const Toggle = (props) => {
 
     const {isToggled, handleChange, labelText } = props;
 
-    // TODO: label should be passed in as props to be reusable
-    // NOTE: each Toggle will need a unique id
-
     return (
         <label className={styles.switch}>
             <span className={styles.text}>{labelText}</span>
