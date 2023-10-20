@@ -42,7 +42,7 @@ app.get('/login', function (req, res) {
   // State is optional, but recommended to protect against cross-site request forgery (we check that the value of state returned by the request is the same as the one we sent)
   // state is stored in cookies to compare later
   const state = crypto.randomBytes(8).toString('hex');
-  res.cookie("spotify_auth_state", state);
+  res.cookie("spotify_auth_state", state, { sameSite: "Strict" });
 
   //var scope = 'user-read-private user-read-email';
 

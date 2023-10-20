@@ -11,7 +11,7 @@ const App = () => {
     );
 
     useEffect(() => {
-        document.cookie = `spotify_token=${spotifyToken}`;
+        document.cookie = `spotify_token=${spotifyToken}; SameSite=Strict`;
     }, [spotifyToken]);
 
     return (
