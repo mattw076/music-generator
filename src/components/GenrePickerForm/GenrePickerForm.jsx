@@ -67,7 +67,7 @@ const GenrePickerForm = (props) => {
 
     // Best practice to keep form data in an object and use a single piece of state for it (rather than one state for each input)
     const [formData, setFormData] = useState({
-        genre: "",
+        genre: "random",
         energy: "",
         isPopular: "",
         vibe: "random"
