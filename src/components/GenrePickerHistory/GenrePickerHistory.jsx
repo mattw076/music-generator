@@ -40,3 +40,5 @@ const GenrePickerHistory = (props) => {
 
 
 export default GenrePickerHistory
+
+// TODO: add genre name to song

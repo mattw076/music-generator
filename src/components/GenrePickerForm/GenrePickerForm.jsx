@@ -70,7 +70,7 @@ const GenrePickerForm = (props) => {
         genre: "",
         energy: "",
         isPopular: "",
-        vibe: ""
+        vibe: "random"
     });
 
     // We create a handler that will work for all form input types
@@ -87,8 +87,6 @@ const GenrePickerForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log(formData);
 
         const { energy, vibe, genre, isPopular } = formData;
 
@@ -235,3 +233,5 @@ const GenrePickerForm = (props) => {
 // NOTE: React has added a "defaultValue" attribute to to the select tag, rather than using <option selected></option>
 
 export default GenrePickerForm
+
+// TODO: "no matching song found" often displayed when using Show only popular songs

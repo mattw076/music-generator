@@ -11,7 +11,7 @@ const GenrePickerPlayer = (props) => {
 
     return (
         <div className={styles.player}>
-        < iframe className={styles.song} src={song.URI} width="100%" height="100%" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        < iframe className={styles.song} src={song.URI} width="100%" height="100%" allow="fullscreen" loading="lazy"></iframe>
         <Star classes={{playerStar: styles.playerStar}} history={history} id={0} handleClickStar={handleClickStar}/>
         <p className={styles.genre}>{song.genre}</p>
         </div>
