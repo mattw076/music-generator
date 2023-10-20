@@ -5,8 +5,9 @@
     "main": "src/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "webpack --mode production",
-        "rebuild": "if exist dist\\ rmdir /s /q dist && webpack --mode production",
+        "build-prod": "webpack --mode production",
+        "build-dev": "webpack --mode development",
+        "rebuild-prod": "if exist dist\\ rmdir /s /q dist && webpack --mode production",
         "start": "nodemon server/app.js",
         "dev": "concurrently \"if exist dist\\ rmdir /s /q dist && webpack --watch --mode development\" \"nodemon server/app.js\""
     },
@@ -32,12 +33,14 @@
         "file-loader": "^6.2.0",
         "html-loader": "^4.2.0",
         "html-webpack-plugin": "^5.5.3",
+        "javascript-obfuscator": "^4.1.0",
         "mini-css-extract-plugin": "^2.7.6",
         "node-sass": "^9.0.0",
         "nodemon": "^3.0.1",
         "sass-loader": "^13.3.2",
         "style-loader": "^3.3.3",
         "webpack": "^5.88.1",
-        "webpack-cli": "^5.1.4"
+        "webpack-cli": "^5.1.4",
+        "webpack-obfuscator": "^3.5.1"
     }
 }

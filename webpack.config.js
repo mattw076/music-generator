@@ -2,6 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 const dotEnv = require('dotenv-webpack');
+const WebpackObfuscator = require('webpack-obfuscator');
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: "./src/index.html",
@@ -14,9 +15,8 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
     filename: "[name].[contenthash].css"
 });
 
-// TODO: ofuscate webpack code (for production version, not dev)
 
-module.exports = {
+const config = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, 'dist'),
@@ -62,4 +62,24 @@ module.exports = {
         ]
     }
 };
+
+module.exports = (env, argv) => {
+   
+    if (argv.mode === "production") {
+        config.module.rules.push({
+            test: /\.js$/,
+            exclude: /node_modules/,
+            enforce: 'post',
+            use: { 
+                loader: WebpackObfuscator.loader, 
+                options: {
+                    rotateStringArray: true
+                }
+            }
+        });
+    }
+
+    return config;
+};
+
 
