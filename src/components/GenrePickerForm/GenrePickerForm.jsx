@@ -88,6 +88,8 @@ const GenrePickerForm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log(formData);
+
         const { energy, vibe, genre, isPopular } = formData;
 
         //const data = spotifyData;
@@ -146,12 +148,13 @@ const GenrePickerForm = (props) => {
             <input
                 className={styles.input}
                 type="number"
-                placeholder="Energy"
+                placeholder="Energy (1 to 100)"
                 min="0"
                 max="100"
                 onChange={handleChange}
                 name="energy"
                 value={formData.energy}
+                required
             />
 
             <span className={styles.vibe}>Vibe:
@@ -232,9 +235,3 @@ const GenrePickerForm = (props) => {
 // NOTE: React has added a "defaultValue" attribute to to the select tag, rather than using <option selected></option>
 
 export default GenrePickerForm
-
-
-// TODO: only allow value between 1 and 100 for energy
-// TODO: form validation?
-
-// TODO: target energy defaults to 0 and causes weird suggestions
