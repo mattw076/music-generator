@@ -94,11 +94,11 @@ const GenrePickerForm = (props) => {
 
         let genreSeed = (genre === "random") ? genres[Math.floor(Math.random() * genres.length)] : genre;
 
-        // TODO: avoid repeat songs
+        // TODO: avoid repeat songs - can't recreate
 
         const token = document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || "";
         if (token) {
-            fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energy / 100}&min_instrumentalness=${vibe === "instrumental" ? 0.7 : 0}&min_acousticness=${vibe === "acoustic" ? 0.7 : 0}&min_danceability=${vibe === "danceable" ? 0.7 : 0}&min_popularity=${isPopular ? 0.7 : 0}`, {
+            fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energy / 100}&min_instrumentalness=${vibe === "instrumental" ? 0.7 : 0}&min_acousticness=${vibe === "acoustic" ? 0.7 : 0}&min_danceability=${vibe === "danceable" ? 0.7 : 0}&target_popularity=${isPopular ? 100 : 0}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -207,7 +207,7 @@ const GenrePickerForm = (props) => {
 
             </span>
 
-            <label className={styles.checkbox}>Show only popular songs
+            <label className={styles.checkbox}>Prefer popular songs
                 <input
                     type="checkbox"
                     onChange={handleChange}
@@ -233,5 +233,3 @@ const GenrePickerForm = (props) => {
 // NOTE: React has added a "defaultValue" attribute to to the select tag, rather than using <option selected></option>
 
 export default GenrePickerForm
-
-// TODO: "no matching song found" often displayed when using Show only popular songs
