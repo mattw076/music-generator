@@ -1,18 +1,28 @@
 .player {
 
+    margin-top: 36px;
+    border-radius: 16px;
+    background-color: #282828;
+
     .song {
+        text-align: center;
         border-style: none;
-        margin-top: 36px;
+
+        > iframe {
+            height: 100px;
+        }
     }
-    
 }
 
-.playerStar {
+p.playerStar {
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 2px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 40px;
 }
 
 .genre {
     text-align: center;
+    padding-bottom: 16px;
+    color: white;
 }
