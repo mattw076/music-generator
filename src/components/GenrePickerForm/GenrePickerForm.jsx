@@ -29,7 +29,12 @@ const GenrePickerForm = (props) => {
                     Authorization: `Bearer ${spotifyToken}`
                 }
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (res.status === 429) {
+                        alert("Too many requests, try waiting a few minutes.")
+                    }
+                    res.json();
+                })
                 .then(data => {
                     if (data && data.genres) {
                         setGenres(data.genres);
@@ -103,14 +108,19 @@ const GenrePickerForm = (props) => {
                     Authorization: `Bearer ${token}`
                 }
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (res.status === 429) {
+                        alert("Too many requests to Spotify. Try waiting a few minutes.")
+                    }
+                    res.json();
+                })
                 .then(data => {
                     if (data && data.tracks && data.tracks[0]) {
 
                         setHistory(prevHistory => [
                             {
                                 genre: genreSeed,
-                                URI: `https://open.spotify.com/embed/track/${data.tracks[0].id}`,
+                                URI: data.tracks[0].id,
                                 favourite: false,
                             },
                             ...prevHistory
