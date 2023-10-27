@@ -40,6 +40,3 @@ const GenrePickerHistory = (props) => {
 
 
 export default GenrePickerHistory
-
-// TODO: save history on refresh (local storage)
-// TODO: history element height needs to adapt to number of history items

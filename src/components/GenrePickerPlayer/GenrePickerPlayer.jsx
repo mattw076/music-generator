@@ -42,7 +42,7 @@ const GenrePickerPlayer = (props) => {
         }
     });
 
-    // TODO: player is not updating when fetch new song
+    // TODO: (1) - player is not updating when fetch new song
 
     // Add Spotify embed script to the page to be able to use the iFrame API
     useEffect(() => {

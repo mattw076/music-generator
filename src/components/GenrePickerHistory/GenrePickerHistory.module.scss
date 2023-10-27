@@ -4,7 +4,9 @@
     border-radius: 12px;
     background: rgb(212, 201, 199);
     padding: 12px;
-    height: 60vh;
+    min-height: 60vh;
+    overflow: hidden;
+    // TODO: make history change size as more items added - check above works
 
     .heading {
         float: left;
