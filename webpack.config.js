@@ -58,20 +58,26 @@ const config = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.js$/,
+                enforce: "pre",
+                use: ["source-map-loader"],
             }
+            // TODO: do I need source-map-loader or not? Not currently helping with error msg
         ]
     }
 };
 
 module.exports = (env, argv) => {
-   
+
     if (argv.mode === "production") {
         config.module.rules.push({
             test: /\.js$/,
             exclude: /node_modules/,
             enforce: 'post',
-            use: { 
-                loader: WebpackObfuscator.loader, 
+            use: {
+                loader: WebpackObfuscator.loader,
                 options: {
                     rotateStringArray: true
                 }
