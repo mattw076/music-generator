@@ -23,26 +23,32 @@ const GenrePickerForm = (props) => {
 
     useEffect(() => {
 
-        if (spotifyToken) {
-            fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
-                headers: {
-                    Authorization: `Bearer ${spotifyToken}`
-                }
-            })
-                .then(res => {
-                    if (res.status === 429) {
-                        alert("Too many requests, try waiting a few minutes.")
-                    }
-                    res.json();
-                })
-                .then(data => {
-                    if (data && data.genres) {
-                        setGenres(data.genres);
-                    }
-                })
-                .catch(err => console.log(err));
+        // if (spotifyToken) {
+        //     fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
+        //         headers: {
+        //             Authorization: `Bearer ${spotifyToken}`
+        //         }
+        //     })
+        //         .then(res => {
+        //             if (res.status === 429) {
+        //                 alert("Too many requests, try waiting a few minutes.")
+        //                 throw(new Error("Too many requests to Spotify. Try waiting a few minutes"));
+        //             }
+        //             res.json();
+        //         })
+        //         .then(data => {
+        //             if (data && data.genres) {
+        //                 setGenres(data.genres);
+        //             }
+        //         })
+        //         .catch(err => {
+                      // Do nothing
+        //          });
 
-        }
+        // }
+
+        // TODO: FIRST - Uncomment above once stop getting Too many requests response
+
 
         /*
         When using async/await, remember: The callback function passed to useEffect cannot be async since it needs to return the cleanup function (not a promise)
@@ -111,6 +117,7 @@ const GenrePickerForm = (props) => {
                 .then(res => {
                     if (res.status === 429) {
                         alert("Too many requests to Spotify. Try waiting a few minutes.")
+                        throw(new Error("Too many requests to Spotify. Try waiting a few minutes"));
                     }
                     res.json();
                 })
@@ -131,6 +138,9 @@ const GenrePickerForm = (props) => {
                         // TODO: make this e.g. a toast instead
                     }
                 })
+                .catch(err => {
+                    // Do nothing
+                });
         } else {
             window.alert("Please log in to Spotify (top right) before generating songs :)")
             // TODO: make this e.g. info text instead

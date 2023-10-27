@@ -38,6 +38,7 @@ const GenrePickerPlayer = (props) => {
         return () => {
             window.onSpotifyIframeApiReady = null;
             delete window.onSpotifyIframeApiReady;
+            // TODO: are these needed? What about deleting the other global variable to do with Spotify on window?
         }
     });
 
