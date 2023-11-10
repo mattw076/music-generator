@@ -17,13 +17,14 @@ const GenrePickerPlayer = (props) => {
         window.onSpotifyIframeApiReady = (IFrameAPI) => {
             const element = document.getElementById('player-iframe');
             const options = {
-                uri: "",
+                uri: "spotify:episode:7makk4oTQel546B0PZlDM5",
                 width: "100%",
                 height: "100px",
                 theme: "dark"
             };
             const callback = (EmbedController) => {
                 try {
+                    
                     EmbedController.loadUri(`spotify:track:${song.URI}`);
                     // // Update the iframe song URI every time the history changes
                     // document.addEventListener("historyChanged", (e) => {
