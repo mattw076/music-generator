@@ -93,6 +93,8 @@ const GenrePickerForm = (props) => {
         });
     }
 
+    // TODO: avoid repeat song suggestions when using the same search criteria
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -128,8 +130,6 @@ const GenrePickerForm = (props) => {
                             ...prevHistory
                         ]);
 
-                        
-
                     } else {
                         window.alert("No matching songs found. Try some different search parameters!")
                         // TODO: make this e.g. a toast instead
@@ -145,9 +145,14 @@ const GenrePickerForm = (props) => {
 
     };
 
-    // Save history state to session storage every time it changes
+    // Save history state to session storage every time it changes, and dispatch an event to tell the Spotify iframe API that history has changed
     useEffect(() => {
         window.sessionStorage.setItem("history", JSON.stringify(history));
+
+        // // Trigger a custom event to tell the Spotify iFrame API to update its song URI
+        // const historyChangedEvent = new CustomEvent("historyChanged", { newSongURI: history.length ? history[0].URI : ""});
+        // document.dispatchEvent(historyChangedEvent);
+        // TODO: remove above?
     }, [history])
     
 

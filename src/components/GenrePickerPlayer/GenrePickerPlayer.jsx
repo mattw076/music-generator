@@ -9,7 +9,21 @@ const GenrePickerPlayer = (props) => {
 
     const song = history[0];
 
+    // Add Spotify embed script to the page (on first time the component loads) to be able to use the iFrame API
+    useEffect(() => {
+        const script = document.createElement('script');
 
+        script.src = "https://open.spotify.com/embed/iframe-api/v1";
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, []);
+
+    // TODO: (2) - player is not updating when fetch new song
 
     // Create a controller to control playback in the embedded song iFrame
     useEffect(() => {
@@ -23,17 +37,24 @@ const GenrePickerPlayer = (props) => {
             };
             const callback = (EmbedController) => {
                 try {
-
                     EmbedController.loadUri(`spotify:track:${song.URI}`);
-
+                    // // Update the iframe song URI every time the history changes
+                    // document.addEventListener("historyChanged", (e) => {
+                    //     EmbedController.loadUri(`spotify:track:${song.URI}`);
+                    //     //EmbedController.loadUri(`spotify:track:${e.newSongURI}`);
+                    // })
+                    // Play the song once the iframe is ready
                     EmbedController.addListener('ready', () => {
                         EmbedController.play();
+                        EmbedController.togglePlay();
+                        // TODO: getting a browser warning that is restricting play from working
                     });
 
                 } catch (err) {
                     console.log(err);
                 }
             };
+            // Create an iframe in place of the "player-iframe" div returned by the component
             IFrameAPI.createController(element, options, callback);
         };
 
@@ -42,23 +63,10 @@ const GenrePickerPlayer = (props) => {
             delete window.onSpotifyIframeApiReady;
             // TODO: are these needed? What about deleting the other global variable to do with Spotify on window?
         }
-    });
-
-    // TODO: (2) - player is not updating when fetch new song
-
-    // Add Spotify embed script to the page to be able to use the iFrame API
-    useEffect(() => {
-        const script = document.createElement('script');
-
-        script.src = "https://open.spotify.com/embed/iframe-api/v1";
-        script.async = true;
-
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        }
     }, []);
+    // }, [history]);
+    // TODO: what dependencies array to use?
+
 
 
     return (

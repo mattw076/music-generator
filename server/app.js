@@ -44,6 +44,8 @@ app.get('/login', function (req, res) {
   const state = crypto.randomBytes(8).toString('hex');
   res.cookie("spotify_auth_state", state, { sameSite: "Strict" });
 
+  // TODO: don't think state is being sent back in query params/being saved in backend cookie properly
+
   //var scope = 'user-read-private user-read-email';
 
   res.redirect(authEndpoint +
