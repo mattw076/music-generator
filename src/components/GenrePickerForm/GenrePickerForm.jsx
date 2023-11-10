@@ -5,7 +5,7 @@ import styles from './GenrePickerForm.module.scss';
 
 const GenrePickerForm = (props) => {
 
-    const { setHistory, spotifyToken } = props;
+    const { history, setHistory, spotifyToken } = props;
 
     /*
     React is responsible for: 
@@ -34,7 +34,7 @@ const GenrePickerForm = (props) => {
                         alert("Too many requests, try waiting a few minutes.")
                         throw(new Error("Too many requests to Spotify. Try waiting a few minutes"));
                     }
-                    res.json();
+                    return res.json();
                 })
                 .then(data => {
                     if (data && data.genres) {
@@ -115,10 +115,11 @@ const GenrePickerForm = (props) => {
                         alert("Too many requests to Spotify. Try waiting a few minutes.")
                         throw(new Error("Too many requests to Spotify. Try waiting a few minutes"));
                     }
-                    res.json();
+                    return res.json();
                 })
                 .then(data => {
                     if (data && data.tracks && data.tracks[0]) {
+                        // TODO: (1) this is getting tracks and genre label is updating but the player isn't appearing
 
                         setHistory(prevHistory => [
                             {
@@ -129,8 +130,7 @@ const GenrePickerForm = (props) => {
                             ...prevHistory
                         ]);
 
-                        sessionStorage.setItem("history", JSON.stringify(history));
-                        // TODO: (2) check this works - save history on refresh
+                        
 
                     } else {
                         window.alert("No matching songs found. Try some different search parameters!")
@@ -146,6 +146,12 @@ const GenrePickerForm = (props) => {
         }
 
     };
+
+    // Save history state to session storage every time it changes
+    useEffect(() => {
+        window.sessionStorage.setItem("history", JSON.stringify(history));
+    }, [history])
+    
 
 
     return (
