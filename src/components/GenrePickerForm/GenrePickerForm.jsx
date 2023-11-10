@@ -47,7 +47,6 @@ const GenrePickerForm = (props) => {
 
         }
 
-
         /*
         When using async/await, remember: The callback function passed to useEffect cannot be async since it needs to return the cleanup function (not a promise)
         Instead define an async function inside the callback and run it immediately.
@@ -119,7 +118,6 @@ const GenrePickerForm = (props) => {
                 })
                 .then(data => {
                     if (data && data.tracks && data.tracks[0]) {
-                        // TODO: (1) this is getting tracks and genre label is updating but the player isn't appearing
 
                         setHistory(prevHistory => [
                             {

@@ -23,8 +23,10 @@ const GenrePickerPlayer = (props) => {
             };
             const callback = (EmbedController) => {
                 try {
+
+                    EmbedController.loadUri(`spotify:track:${song.URI}`);
+
                     EmbedController.addListener('ready', () => {
-                        EmbedController.loadUri(`spotify:track:${song.URI}`);
                         EmbedController.play();
                     });
 
