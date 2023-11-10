@@ -23,31 +23,29 @@ const GenrePickerForm = (props) => {
 
     useEffect(() => {
 
-        // if (spotifyToken) {
-        //     fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
-        //         headers: {
-        //             Authorization: `Bearer ${spotifyToken}`
-        //         }
-        //     })
-        //         .then(res => {
-        //             if (res.status === 429) {
-        //                 alert("Too many requests, try waiting a few minutes.")
-        //                 throw(new Error("Too many requests to Spotify. Try waiting a few minutes"));
-        //             }
-        //             res.json();
-        //         })
-        //         .then(data => {
-        //             if (data && data.genres) {
-        //                 setGenres(data.genres);
-        //             }
-        //         })
-        //         .catch(err => {
-                      // Do nothing
-        //          });
+        if (spotifyToken) {
+            fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
+                headers: {
+                    Authorization: `Bearer ${spotifyToken}`
+                }
+            })
+                .then(res => {
+                    if (res.status === 429) {
+                        alert("Too many requests, try waiting a few minutes.")
+                        throw(new Error("Too many requests to Spotify. Try waiting a few minutes"));
+                    }
+                    res.json();
+                })
+                .then(data => {
+                    if (data && data.genres) {
+                        setGenres(data.genres);
+                    }
+                })
+                .catch(err => {
+                    // Do nothing
+                 });
 
-        // }
-
-        // TODO: FIRST - Uncomment above once stop getting Too many requests response
+        }
 
 
         /*
@@ -251,6 +249,6 @@ const GenrePickerForm = (props) => {
 // NOTE: to make radio buttons into controlled components, use the checked attribute as above
 // NOTE: in React, textarea HTML tag has been changed to be self-closing and works in the same way as input (needs name, value attribute etc.). Usually textarea value comes from the text between the tags.
 // NOTE: as for textarea, the select tag has been changed in React to accept a value attribute (unlike pure HTML where the value comes from the nested option tag having a "selected" attribute)
-// NOTE: React has added a "defaultValue" attribute to to the select tag, rather than using <option selected></option>
+// NOTE: React has added a "defaultValue" attribute to the select tag, rather than using <option selected></option>
 
 export default GenrePickerForm

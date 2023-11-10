@@ -50,7 +50,7 @@ const GenrePicker = (props) => {
                 .then(res => {
                     res.json().then(data => {
                         setSpotifyToken(data.access_token);
-                        localStorage.setItem("refresh_token", data.refresh_token);
+                        //sessionStorage.setItem("refresh_token", data.refresh_token);
                         refreshToken(data.expires_in, data.refresh_token);
                     })
                 });
