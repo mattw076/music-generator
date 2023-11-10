@@ -25,7 +25,7 @@ const App = () => {
 export default App;
 
 
-// TODO: firefox "Stylesheet could not be loaded" warning - no longer appearing
+// TODO: firefox "Stylesheet could not be loaded" warning
 
 // TODO: (3) - other console errors (e.g. source map)
 

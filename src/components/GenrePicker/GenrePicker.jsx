@@ -81,5 +81,3 @@ const GenrePicker = (props) => {
 }
 
 export default GenrePicker
-
-// TODO: styling (e.g. player)
