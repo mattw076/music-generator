@@ -9,19 +9,6 @@ const GenrePickerPlayer = (props) => {
 
     const song = history[0];
 
-    // Add Spotify embed script to the page (on first time the component loads) to be able to use the iFrame API
-    useEffect(() => {
-        const script = document.createElement('script');
-
-        script.src = "https://open.spotify.com/embed/iframe-api/v1";
-        script.async = true;
-
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        }
-    }, []);
 
     // TODO: (2) - player is not updating when fetch new song
 
@@ -46,7 +33,7 @@ const GenrePickerPlayer = (props) => {
                     // Play the song once the iframe is ready
                     EmbedController.addListener('ready', () => {
                         EmbedController.play();
-                        EmbedController.togglePlay();
+                        //EmbedController.togglePlay();
                         // TODO: getting a browser warning that is restricting play from working
                     });
 
@@ -67,7 +54,20 @@ const GenrePickerPlayer = (props) => {
     // }, [history]);
     // TODO: what dependencies array to use?
 
+    // Add Spotify embed script to the page (on first time the component loads) to be able to use the iFrame API
+    // NOTE: this has to go after the onSpotifyIframeApiReady useEffect for some reason otherwise browser restricts autoplay
+    useEffect(() => {
+        const script = document.createElement('script');
 
+        script.src = "https://open.spotify.com/embed/iframe-api/v1";
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, []);
 
     return (
         <div className={styles.player}>
