@@ -84,7 +84,8 @@ module.exports = (env, argv) => {
             }
         });
 
-        config.devtool = "hidden-source-map";
+        //config.devtool = "hidden-source-map";
+        // TODO: add above back in when not debugging
     } else {
         config.devtool = "eval-source-map";
     }
