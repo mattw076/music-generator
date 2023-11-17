@@ -25,9 +25,8 @@ app.get('/api', (req, res) => {
 });
 app.get("/", (req, res) => {
 
-    console.log("Matt: " + process.env);
-    console.log("Matt: " + process.env.APP_URL);
-    console.log("Matt: " + process.env.SPOTIFY.URL);
+    // console.log("Matt: " + process.env);
+    // TODO: this clg isn't appearing
     res.sendFile(HTML_FILE, function (err) {
         if (err) {
             res.status(500).send(err);
@@ -40,9 +39,7 @@ app.listen(port, function () {
 
 // Initiate log in to Spotify by requesting an authorization code
 app.get('/login', function (req, res) {
-    console.log("Matt: " + process.env);
-    console.log("Matt: " + process.env.APP_URL);
-    console.log("Matt: " + process.env.SPOTIFY.URL);
+
     const authEndpoint = spotify_url + "authorize?";
 
     // State is optional, but recommended to protect against cross-site request forgery (we check that the value of state returned by the request is the same as the one we sent)

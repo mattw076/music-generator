@@ -85,7 +85,7 @@ module.exports = (env, argv) => {
         });
 
         //config.devtool = "hidden-source-map";
-        // TODO: add above back in when not debugging
+        // TODO: add above back in when not debugging - this hasn't made source map visible in Render
     } else {
         config.devtool = "eval-source-map";
     }
