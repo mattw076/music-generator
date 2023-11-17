@@ -27,6 +27,11 @@ const config = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
+                enforce: "pre",
+                use: ["source-map-loader"],
+            },
+            {
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
@@ -58,13 +63,8 @@ const config = {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.js$/,
-                enforce: "pre",
-                use: ["source-map-loader"],
             }
-            // TODO: do I need source-map-loader or not? Not currently helping with error msg
+            // TODO: Getting a source map console error even though I can see files and line numbers fine
         ]
     }
 };
@@ -83,6 +83,10 @@ module.exports = (env, argv) => {
                 }
             }
         });
+
+        config.devtool = "hidden-source-map";
+    } else {
+        config.devtool = "eval-source-map";
     }
 
     return config;

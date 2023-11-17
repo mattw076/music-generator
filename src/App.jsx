@@ -25,8 +25,6 @@ const App = () => {
 export default App;
 
 
-// TODO: firefox "Stylesheet could not be loaded" warning
-
-// TODO: (3) - other console errors (e.g. source map)
+// TODO: firefox "Stylesheet could not be loaded" warning (only appears sometimes)
 
 // TODO: (4) - deploy (hiroku?)
