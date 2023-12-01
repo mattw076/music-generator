@@ -93,7 +93,7 @@ const GenrePickerForm = (props) => {
         });
     }
 
-    // TODO: avoid repeat song suggestions when using the same search criteria
+    // TODO: avoid repeat song suggestions when using same unusual search criteria
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -152,7 +152,7 @@ const GenrePickerForm = (props) => {
         // Trigger a custom event to tell the Spotify iFrame API to update its song URI
         const historyChangedEvent = new CustomEvent("historyChanged", { "detail": {newSongURI: history.length ? history[0].URI : ""}});
         document.dispatchEvent(historyChangedEvent);
-        
+
     }, [history])
     
 

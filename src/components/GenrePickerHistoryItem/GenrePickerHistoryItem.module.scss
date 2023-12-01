@@ -3,12 +3,13 @@
     margin-top: 12px;
     height: 100px;
     white-space:nowrap;
-    overflow:hidden;
+    overflow: visible;
+    // TODO: * genres move below songs when shrink window
     clear: both;
 
     & .song {
 
-        width: 90%;
+        max-width: 88%;
         border-style: none;
         display: inline-block;
     }
@@ -18,12 +19,14 @@
     display: inline-block;
     vertical-align: top;
     margin: 24px 24px 0px 0px;
+    max-width: 5%;
 }
 
 .genre {
-    display: inline-block;
-    vertical-align: top;
-    margin: 32px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    margin-right: 32px;
+    float: right;
+    min-width: 5%;
 }
 
-// TODO: * genre name cut off when too long
