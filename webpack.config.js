@@ -85,6 +85,7 @@ module.exports = (env, argv) => {
         });
 
         config.devtool = "hidden-source-map";
+        // NOTE: taking this out doesn't make source map visible in Render deployment
     } else {
         config.devtool = "eval-source-map";
     }
