@@ -26,5 +26,3 @@ export default App;
 
 
 // TODO: firefox "Stylesheet could not be loaded" warning (only appears sometimes)
-
-// TODO: (4) - deploy (hiroku?)

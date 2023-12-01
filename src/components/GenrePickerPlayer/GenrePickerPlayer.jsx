@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import styles from './GenrePickerPlayer.module.scss';
 
 import Star from '../Star/Star.jsx';
@@ -9,8 +9,10 @@ const GenrePickerPlayer = (props) => {
 
     const song = history[0];
 
+    // TODO: song is only a preview even though we are logged in
 
-    // TODO: (2) - player is not updating when fetch new song
+    const getSongURI = () => song.URI;
+
 
     // Create a controller to control playback in the embedded song iFrame
     useEffect(() => {
@@ -24,18 +26,19 @@ const GenrePickerPlayer = (props) => {
             };
             const callback = (EmbedController) => {
                 try {
-                    
+                    // Update the iframe song URI on the first time the iframe is loaded
                     EmbedController.loadUri(`spotify:track:${song.URI}`);
-                    // // Update the iframe song URI every time the history changes
-                    // document.addEventListener("historyChanged", (e) => {
-                    //     EmbedController.loadUri(`spotify:track:${song.URI}`);
-                    //     //EmbedController.loadUri(`spotify:track:${e.newSongURI}`);
-                    // })
+                    
+                    // Update the iframe song URI every time after that when the history changes
+                    document.addEventListener("historyChanged", (e) => {
+                        console.log(history);
+                        EmbedController.loadUri(`spotify:track:${e.detail.newSongURI}`);
+                    })
+
                     // Play the song once the iframe is ready
                     EmbedController.addListener('ready', () => {
                         EmbedController.play();
-                        //EmbedController.togglePlay();
-                        // TODO: getting a browser warning that is restricting play from working
+                        // TODO: browser warning "Autoplay is only allowed when approved by the user"", but autoplay is still working fine...
                     });
 
                 } catch (err) {
@@ -49,25 +52,21 @@ const GenrePickerPlayer = (props) => {
         return () => {
             window.onSpotifyIframeApiReady = null;
             delete window.onSpotifyIframeApiReady;
-            // TODO: are these needed? What about deleting the other global variable to do with Spotify on window?
+            // Q: Do I need to delete the other Spotify global variable on the window?
         }
     }, []);
-    // }, [history]);
-    // TODO: what dependencies array to use?
 
     // Add Spotify embed script to the page (on first time the component loads) to be able to use the iFrame API
     // NOTE: this has to go after the onSpotifyIframeApiReady useEffect for some reason otherwise browser restricts autoplay
     useEffect(() => {
         const script = document.createElement('script');
 
+        script.id = "spotify-iframe-script";
         script.src = "https://open.spotify.com/embed/iframe-api/v1";
         script.async = true;
 
         document.body.appendChild(script);
 
-        return () => {
-            document.body.removeChild(script);
-        }
     }, []);
 
     return (

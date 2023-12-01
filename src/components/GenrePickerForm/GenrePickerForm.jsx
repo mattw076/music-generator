@@ -149,10 +149,10 @@ const GenrePickerForm = (props) => {
     useEffect(() => {
         window.sessionStorage.setItem("history", JSON.stringify(history));
 
-        // // Trigger a custom event to tell the Spotify iFrame API to update its song URI
-        // const historyChangedEvent = new CustomEvent("historyChanged", { newSongURI: history.length ? history[0].URI : ""});
-        // document.dispatchEvent(historyChangedEvent);
-        // TODO: remove above?
+        // Trigger a custom event to tell the Spotify iFrame API to update its song URI
+        const historyChangedEvent = new CustomEvent("historyChanged", { "detail": {newSongURI: history.length ? history[0].URI : ""}});
+        document.dispatchEvent(historyChangedEvent);
+        
     }, [history])
     
 
