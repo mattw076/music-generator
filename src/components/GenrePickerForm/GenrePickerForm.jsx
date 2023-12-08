@@ -101,12 +101,13 @@ const GenrePickerForm = (props) => {
         const { energy, vibe, genre, isPopular } = formData;
 
         //const data = spotifyData;
-
-        let genreSeed = (genre === "random" || genre === "") ? genres[Math.floor(Math.random() * genres.length)] : genre;
+        const energyLevel = energy || Math.floor(Math.random() * 100) + 1;
+        const genreSeed = (genre === "random" || genre === "") ? genres[Math.floor(Math.random() * genres.length)] : genre;
+        
 
         const token = document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || "";
         if (token) {
-            fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energy / 100}&min_instrumentalness=${vibe === "instrumental" ? 0.7 : 0}&min_acousticness=${vibe === "acoustic" ? 0.7 : 0}&min_danceability=${vibe === "danceable" ? 0.7 : 0}&target_popularity=${isPopular ? 100 : 0}`, {
+            fetch(`https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genreSeed}&target_energy=${energyLevel / 100}&min_instrumentalness=${vibe === "instrumental" ? 0.7 : 0}&min_acousticness=${vibe === "acoustic" ? 0.7 : 0}&min_danceability=${vibe === "danceable" ? 0.7 : 0}&target_popularity=${isPopular ? 100 : 0}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -175,8 +176,8 @@ const GenrePickerForm = (props) => {
             <input
                 className={styles.input}
                 type="number"
-                placeholder="Energy (1 to 100)"
-                min="0"
+                placeholder="Energy level (1 - 100 or leave blank for random)"
+                min="1"
                 max="100"
                 onChange={handleChange}
                 name="energy"
