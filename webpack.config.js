@@ -37,7 +37,7 @@ const config = {
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
-                loader: 'file-loader'
+                type: 'asset/resource'
             },
             {
                 test: /\.scss$/,
@@ -64,7 +64,7 @@ const config = {
                     }
                 ]
             }
-            // TODO: Getting a source map console error even though I can see files and line numbers fine
+            // TODO: Getting a source map console error in firefox even though you can see the files and line numbers fine
         ]
     }
 };
