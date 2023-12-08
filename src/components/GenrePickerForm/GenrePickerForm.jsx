@@ -18,7 +18,7 @@ const GenrePickerForm = (props) => {
     
     */
 
-    const [genres, setGenres] = useState(["drum-and-bass", "indie-rock", "hip-hop"]);
+    const [genres, setGenres] = useState([]);
 
 
     useEffect(() => {
@@ -75,7 +75,7 @@ const GenrePickerForm = (props) => {
 
     // Best practice to keep form data in an object and use a single piece of state for it (rather than one state for each input)
     const [formData, setFormData] = useState({
-        genre: "random",
+        genre: "",
         energy: "",
         isPopular: "",
         vibe: "random"
@@ -102,7 +102,7 @@ const GenrePickerForm = (props) => {
 
         //const data = spotifyData;
 
-        let genreSeed = (genre === "random") ? genres[Math.floor(Math.random() * genres.length)] : genre;
+        let genreSeed = (genre === "random" || genre === "") ? genres[Math.floor(Math.random() * genres.length)] : genre;
 
         const token = document.cookie.split("; ").find((row) => row.startsWith("spotify_token="))?.split("=")[1] || "";
         if (token) {
@@ -165,10 +165,10 @@ const GenrePickerForm = (props) => {
                 onChange={handleChange}
                 name="genre"
                 value={formData.genre}
+                required
             >
-                <option value="" hidden>Select a genre</option>
+                <option value="" disabled>Select a genre</option>
                 <option value="random">RANDOM</option>
-                {/* TODO: select a genre not showing, also don't have any genres by default*/}
                 {genreSelectOptions}
             </select>
 
@@ -181,7 +181,6 @@ const GenrePickerForm = (props) => {
                 onChange={handleChange}
                 name="energy"
                 value={formData.energy}
-                required
             />
 
             <span className={styles.vibe}>Vibe:

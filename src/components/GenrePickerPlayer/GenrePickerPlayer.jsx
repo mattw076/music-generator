@@ -11,8 +11,6 @@ const GenrePickerPlayer = (props) => {
 
     // TODO: * song is only a preview even though we are logged in
 
-    const getSongURI = () => song.URI;
-
 
     // Create a controller to control playback in the embedded song iFrame
     useEffect(() => {
