@@ -9,7 +9,7 @@ const GenrePickerPlayer = (props) => {
 
     const song = history[0];
 
-    // TODO: song is only a preview even though we are logged in
+    // TODO: * song is only a preview even though we are logged in
 
     const getSongURI = () => song.URI;
 

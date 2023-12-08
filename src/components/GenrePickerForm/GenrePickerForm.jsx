@@ -168,6 +168,7 @@ const GenrePickerForm = (props) => {
             >
                 <option value="" hidden>Select a genre</option>
                 <option value="random">RANDOM</option>
+                {/* TODO: select a genre not showing, also don't have any genres by default*/}
                 {genreSelectOptions}
             </select>
 

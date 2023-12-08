@@ -4,12 +4,19 @@
     height: 100px;
     white-space:nowrap;
     overflow: visible;
-    // TODO: * genres move below songs when shrink window
     clear: both;
 
     & .song {
-
+        width: 88%;
         max-width: 88%;
+        @media (max-width: 1024px) {
+            width: 80%;
+            max-width: 80%;
+        }
+        @media (max-width: 768px) {
+            width: 70%;
+            max-width: 70%;
+        }
         border-style: none;
         display: inline-block;
     }
@@ -23,10 +30,10 @@
 }
 
 .genre {
-    margin-top: 32px;
-    margin-bottom: 32px;
-    margin-right: 32px;
-    float: right;
-    min-width: 5%;
+    margin: 30px 24px 0px 24px;
+    width: 10%;
+    min-width: 10%;
+    display: inline-block;
+    vertical-align: top;
 }
 
