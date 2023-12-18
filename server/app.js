@@ -29,14 +29,14 @@ app.get("/", (req, res) => {
     console.log("Matt: " + process.env);
     // TODO: this clg isn't appearing in Render logs
     if (app_url) {
-
+        // do nothing
+        
+    } else {
         res.sendFile(HTML_FILE, function (err) {
             if (err) {
                 res.status(500).send(err);
             }
         });
-    } else {
-        console.log("NO PROCESS ENV");
     }
 });
 app.listen(port, function () {
