@@ -3,6 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv').config();
 const fetch = require("node-fetch");
 const crypto = require('crypto');
+const e = require('express');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,12 +27,17 @@ app.get('/api', (req, res) => {
 app.get("/", (req, res) => {
 
     console.log("Matt: " + process.env);
-    // TODO: this clg isn't appearing - check in Render logs
-    res.sendFile(HTML_FILE, function (err) {
-        if (err) {
-            res.status(500).send(err);
-        }
-    });
+    // TODO: this clg isn't appearing in Render logs
+    if (app_url) {
+
+        res.sendFile(HTML_FILE, function (err) {
+            if (err) {
+                res.status(500).send(err);
+            }
+        });
+    } else {
+        console.log("NO PROCESS ENV");
+    }
 });
 app.listen(port, function () {
     console.log('App listening on port: ' + port);
