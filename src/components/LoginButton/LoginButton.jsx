@@ -4,8 +4,6 @@ import styles from "./LoginButton.module.scss";
 const LoginButton = () => {
 
     const loginUrl = process.env.APP_URL + "login";
-    // const loginUrl = "https://music-generator.onrender.com/" + "login";
-    // TODO: * process.env is undefined in Render deployment
 
     return (
         <a className={styles.loginButton} href={loginUrl} >Log in to Spotify</a>

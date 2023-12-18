@@ -30,9 +30,7 @@ const GenrePicker = (props) => {
     const refreshToken = (expiresIn, refreshToken) => {
         setTimeout(() => {
             const urlParams = new URLSearchParams({ refresh_token: refreshToken });
-            // TODO: * process.env not working in Render deployment
             fetch(process.env.APP_URL + "refresh_token?" + urlParams)
-            //fetch("https://music-generator.onrender.com/" + "refresh_token?" + urlParams)
                 .then(res => {
                     res.json().then(data => {
                         setSpotifyToken(data.access_token);
@@ -48,9 +46,7 @@ const GenrePicker = (props) => {
         const urlParams = new URLSearchParams(location.search);
 
         if (urlParams.size > 0 && !spotifyToken) {
-            // TODO: * process.env not working in Render deployment
             fetch(process.env.APP_URL + "access_token?" + urlParams)
-            //fetch("https://music-generator.onrender.com/" + "access_token?" + urlParams)
                 .then(res => {
                     res.json().then(data => {
                         setSpotifyToken(data.access_token);

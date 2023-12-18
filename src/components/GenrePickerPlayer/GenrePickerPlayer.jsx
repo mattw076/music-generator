@@ -9,9 +9,6 @@ const GenrePickerPlayer = (props) => {
 
     const song = history[0];
 
-    // TODO: * song is only a preview even though we are logged in
-
-
     // Create a controller to control playback in the embedded song iFrame
     useEffect(() => {
         window.onSpotifyIframeApiReady = (IFrameAPI) => {
@@ -45,6 +42,8 @@ const GenrePickerPlayer = (props) => {
             };
             // Create an iframe in place of the "player-iframe" div returned by the component
             IFrameAPI.createController(element, options, callback);
+
+            // NOTE: Spotify has a bug in Firefox that means song is only a preview even when we are logged in
         };
 
         return () => {

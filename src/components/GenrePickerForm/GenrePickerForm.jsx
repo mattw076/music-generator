@@ -133,7 +133,7 @@ const GenrePickerForm = (props) => {
 
                     } else {
                         window.alert("No matching songs found. Try some different search parameters!")
-                        // TODO: make this e.g. a toast instead
+                        // TODO: make this a toast instead
                     }
                 })
                 .catch(err => {
@@ -141,7 +141,7 @@ const GenrePickerForm = (props) => {
                 });
         } else {
             window.alert("Please log in to Spotify first using the button at the top right of the page.")
-            // TODO: make this e.g. info text instead
+            // TODO: make this e.g. info text under the form control instead
         }
 
     };
