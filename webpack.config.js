@@ -64,7 +64,6 @@ const config = {
                     }
                 ]
             }
-            // TODO: Getting a source map console error in firefox even though you can see the files and line numbers fine
         ]
     }
 };
@@ -85,7 +84,6 @@ module.exports = (env, argv) => {
         });
 
         config.devtool = "hidden-source-map";
-        // NOTE: taking this out doesn't make source map visible in Render deployment
     } else {
         config.devtool = "eval-source-map";
     }

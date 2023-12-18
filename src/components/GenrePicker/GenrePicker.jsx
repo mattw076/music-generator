@@ -11,17 +11,6 @@ const GenrePicker = (props) => {
     const { spotifyToken, setSpotifyToken } = props;
 
 
-    // useState(initialStateValue), returns array [ stateValue, setStateValue ]
-
-    // Best practice when new state value is based on old state value is to pass callback to setState:
-    // setState(prevState => prevState + 1);
-
-    // Can also pass a callback function as 2nd paramter to be run after state is set (since state is set asynchronously)
-
-
-    // Generally, it is bad practice to initialise state based on the value of incoming props (e.g. each favourites star intialises its own state based on a "favourite" prop). It is likely better to put state in the parent component in this case. See:
-    // https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-
     const sessionHistory = window.sessionStorage.getItem("history");
     const sessionHistoryParsed = sessionHistory ? JSON.parse(sessionHistory) : [];
     const [history, setHistory] = useState(sessionHistoryParsed.length ? sessionHistoryParsed : []);
@@ -63,7 +52,7 @@ const GenrePicker = (props) => {
     const handleClickStar = (id) => {
         setHistory(prevHistory => {
             return prevHistory.map((song, i) => {
-                // if position of song in history matches the given id, update the "favourite" property of the song that was clicked, otherwise don't update the "favoruite" property
+                // if position of song in history matches the given id, update the "favourite" property of the song that was clicked, otherwise don't update the "favourite" property
                 return (i === id) ? { ...song, favourite: !song.favourite } : song;
             })
         })

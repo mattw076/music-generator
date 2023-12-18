@@ -45,7 +45,6 @@ app.get('/login', function (req, res) {
     const state = crypto.randomBytes(8).toString('hex');
     res.cookie("spotify_auth_state", state, { sameSite: "Strict" });
 
-    // TODO: don't think state is being sent back in query params/being saved in backend cookie properly
 
     //var scope = 'user-read-private user-read-email';
 
@@ -81,8 +80,6 @@ app.get('/access_token', function (req, res) {
     // If state received back is not the same one we sent, display error
     const stateCookie = req.headers.cookie.split("; ").find((row) => row.startsWith("spotify_auth_state="))?.split("=")[1];
     if (state === null || state !== stateCookie) {
-        // Q: What does # signify in the example given below
-        // res.redirect('/#' + new URLSearchParams({ error: 'state_mismatch' }));
         res.redirect('/' + new URLSearchParams({ error: 'state_mismatch' }));
     } else {
         const endpoint = spotify_url + "api/token";
@@ -96,7 +93,7 @@ app.get('/access_token', function (req, res) {
             "Content-Type": 'application/x-www-form-urlencoded'
         };
 
-        // get the access token and return repsonse containing access token to client-side
+        // get the access token and return response containing access token to client-side
         fetch(endpoint, { method: "POST", headers: headers, body: new URLSearchParams(queryParams) })
             .then(response => response.json())
             .then(data => res.send(data))

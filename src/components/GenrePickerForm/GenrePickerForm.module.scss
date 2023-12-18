@@ -6,7 +6,7 @@
 
     @media (max-width: 768px) {
         display: grid;
-        grid-template: 40px / 1fr; // columns' width / height (1 fraction = entire height)
+        grid-template: 40px / 1fr;
     }
 
     .input {
@@ -109,7 +109,6 @@
         width: 100%;
         max-width: 100%;
         padding: 0px 12px 0px 12px;
-        //overflow: hidden;
         border-radius: 5px;
         background-color: rgb(216, 202, 209);
         border: none;

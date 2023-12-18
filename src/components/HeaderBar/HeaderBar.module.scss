@@ -13,15 +13,13 @@
     }
 
     >.title {
-        font-size: 1.25rem;
-        // "relative to root element" - 20px
+        font-size: 1.25rem; // "relative to root element" - 20px
         // root element is typically <html> which has browser default of 16px
         margin-right: auto;
     }
 
     >.subheading {
-        font-size: 0.75rem;
-        // "relative to root element" - i.e. 12px
+        font-size: 0.75rem; // "relative to root element" - i.e. 12px
         font-weight: 500;
         margin-left: auto;
         padding: 12px;

@@ -33,7 +33,6 @@ const GenrePickerPlayer = (props) => {
                     // Play the song once the iframe is ready
                     EmbedController.addListener('ready', () => {
                         EmbedController.play();
-                        // TODO: browser warning "Autoplay is only allowed when approved by the user"", but autoplay is still working fine...
                     });
 
                 } catch (err) {
@@ -49,7 +48,7 @@ const GenrePickerPlayer = (props) => {
         return () => {
             window.onSpotifyIframeApiReady = null;
             delete window.onSpotifyIframeApiReady;
-            // Q: Do I need to delete the other Spotify global variable on the window?
+
         }
     }, []);
 

@@ -15,8 +15,4 @@ const Toggle = (props) => {
     )
 }
 
-// NOTE: in React, the for attribute of a label is called htmlFor, so when not nesting the input in the label as above, we would use e.g:
-// <label htmlFor="test">Test</label>
-// <input type="text" id="test" />
-
 export default Toggle

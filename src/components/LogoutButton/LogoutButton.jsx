@@ -10,6 +10,4 @@ const LogoutButton = (props) => {
     )
 }
 
-// TODO: "Logged out successfully" toast message
-
 export default LogoutButton;
