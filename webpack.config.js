@@ -22,7 +22,7 @@ const config = {
         path: path.join(__dirname, 'dist'),
         filename: "[name].js"
     },
-    plugins: [htmlPlugin, miniCssExtractPlugin, new dotEnv()],
+    plugins: [htmlPlugin, miniCssExtractPlugin, new dotEnv({ systemvars: true })],
     module: {
         rules: [
             {

@@ -25,8 +25,6 @@ app.get('/api', (req, res) => {
 });
 app.get("/", (req, res) => {
 
-    console.log("Matt: " + process.env);
-    // TODO: this clg isn't appearing in Render logs
     res.sendFile(HTML_FILE, function (err) {
         if (err) {
             res.status(500).send(err);
